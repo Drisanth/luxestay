@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<div class="container my-4">
+  <h2>Manage Coupons</h2>
+  <a href="/admin/coupons/new" class="btn btn-primary">+ New Coupon</a>
+  <table class="table mt-3">
+    <thead><tr><th>Code</th><th>Discount %</th><th>Expires</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% coupons.forEach(c => { %>
+        <tr>
+          <td><%= c.code %></td>
+          <td><%= c.discount %></td>
+          <td><%= c.expiresAt.toDateString() %></td>
+          <td>
+            <form method="POST" action="/admin/coupons/<%= c._id %>/delete">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/footer') %>

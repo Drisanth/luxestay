@@ -1,0 +1,20 @@
+<%- include('../partials/header', { user: user }) %>
+<div class="container my-4">
+  <h2>Explore Our Rooms</h2>
+  <div class="row">
+    <% rooms.forEach(room => { %>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="/images/rooms/<%= room._id %>.jpg" alt="<%= room.name %>">
+          <div class="card-body">
+            <h3 class="card-title"><%= room.name %></h3>
+            <p class="card-text"><%= room.description.substring(0, 80) %>…</p>
+            <p class="card-price">From $<%= room.price %>/night</p>
+            <a href="/rooms/<%= room._id %>" class="btn-primary">View Details & Book</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+<%- include('../partials/footer') %>

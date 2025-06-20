@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/css/style.css">
+
+<nav class="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">LuxeStay Hotels</a>
+    <ul class="navbar-nav">
+      <li><a href="/rooms">Rooms</a></li>
+      <% if (!user) { %>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+      <% } else { %>
+        <li><a href="/bookings/my">My Bookings</a></li>
+        <% if (user.isAdmin) { %>
+          <li><a href="/admin/dashboard">Admin</a></li>
+        <% } %>
+        <li><a href="/auth/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

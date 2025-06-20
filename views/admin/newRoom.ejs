@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+<div class="container my-4">
+  <h2>Add New Room</h2>
+  <form method="POST" action="/admin/rooms">
+    <div class="form-group">
+      <label>Name</label>
+      <input name="name" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label>Type</label>
+      <input name="type" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea name="description" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Price (per night)</label>
+      <input type="number" name="price" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label>Capacity (number of guests)</label>
+      <input type="number" name="capacity" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label>Amenities (comma-separated)</label>
+      <input name="amenities" class="form-control" placeholder="WiFi, AC, TV" required>
+    </div>
+
+    <div class="form-group">
+      <label>Available Rooms</label>
+      <input type="number" name="available" class="form-control" required>
+    </div>
+
+    <button class="btn-primary mt-3">Add Room</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

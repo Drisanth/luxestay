@@ -1,0 +1,29 @@
+<%- include('../partials/header', { user: user }) %>
+<div class="container my-4" style="max-width:600px;">
+  <h2>Checkout – <%= room.name %></h2>
+  <p>Check-in: <%= checkIn %> | Check-out: <%= checkOut %></p>
+  <p>Guests: <%= guests %></p>
+  <p><strong>Subtotal (nights × $<%= room.price %>):</strong> $<%= total.toFixed(2) %></p>
+  <form action="/bookings" method="POST">
+    <input type="hidden" name="roomId" value="<%= room._id %>">
+    <input type="hidden" name="checkIn" value="<%= checkIn %>">
+    <input type="hidden" name="checkOut" value="<%= checkOut %>">
+    <input type="hidden" name="guests" value="<%= guests %>">
+    <div class="form-group">
+      <label>Coupon Code (if any)</label>
+      <input name="coupon" class="form-control" placeholder="e.g. WELCOME10">
+    </div>
+    <div class="form-group">
+      <label>Payment Method</label>
+      <select name="paymentMethod" class="form-control">
+        <option>UPI</option>
+        <option>Credit Card</option>
+        <option>Debit Card</option>
+        <option>Wallet</option>
+        <option>At Hotel</option>
+      </select>
+    </div>
+    <button class="btn-primary">Confirm Booking</button>
+  </form>
+</div>
+<%- include('../partials/footer') %>

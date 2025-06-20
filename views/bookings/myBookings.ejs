@@ -1,0 +1,19 @@
+<%- include('../partials/header', { user: user }) %>
+<div class="container my-4">
+  <h2>My Bookings</h2>
+  <% bookings.forEach(b => { %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Booking ID: <%= b._id %></h5>
+        <p>Check-in: <%= b.checkIn.toDateString() %> – Check-out: <%= b.checkOut.toDateString() %></p>
+        <p>Guests: <%= b.guests %> | Total: $<%= b.totalPrice.toFixed(2) %></p>
+        <p>Status: <span class="<%= b.status.toLowerCase() %>"><%= b.status %></span></p>
+        <a href="/rooms/<%= b.room._id %>" class="btn-primary">View Room Details</a>
+        <% if (b.status==='PENDING') { %>
+          <a href="/bookings/cancel/<%= b._id %>" class="btn btn-link text-danger">Cancel Booking</a>
+        <% } %>
+      </div>
+    </div>
+  <% }) %>
+</div>
+<%- include('../partials/footer') %>

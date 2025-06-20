@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<div class="container my-4">
+  <h2>Manage Bookings</h2>
+  <table class="table">
+    <thead>
+      <tr><th>User</th><th>Room</th><th>Dates</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach(b => { %>
+        <tr>
+          <td><%= b.user?.username %></td>
+          <td><%= b.room?.name %></td>
+          <td><%= b.checkIn.toDateString() %> → <%= b.checkOut.toDateString() %></td>
+          <td><%= b.status %></td>
+          <td><button class="btn btn-sm">Change</button></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,32 @@
+<%- include('../partials/header', { user: user }) %>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="/images/rooms/<%= room._id %>.jpg" class="img-fluid" alt="<%= room.name %>">
+    </div>
+    <div class="col-md-6">
+      <h2><%= room.name %></h2>
+      <p><%= room.description %></p>
+      <p><strong>Capacity:</strong> Up to <%= room.capacity %> guests</p>
+      <p><strong>Amenities:</strong> <%= room.amenities.join(', ') %></p>
+      <p class="card-price">$<%= room.price %>/night</p>
+      <form action="/bookings/checkout" method="GET">
+        <input type="hidden" name="roomId" value="<%= room._id %>">
+        <div class="form-group">
+          <label>Check-in Date</label>
+          <input type="date" name="checkIn" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Check-out Date</label>
+          <input type="date" name="checkOut" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Guests</label>
+          <input type="number" name="guests" class="form-control" min="1" max="<%= room.capacity %>" value="1">
+        </div>
+        <button type="submit" class="btn-primary">Proceed to Payment</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

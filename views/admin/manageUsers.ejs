@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+<div class="container my-4">
+  <h2>Manage Users</h2>
+  <table class="table">
+    <thead>
+      <tr><th>Username</th><th>Email</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% users.forEach(u => { %>
+        <tr>
+          <td><%= u.username %></td>
+          <td><%= u.email %></td>
+          <td>
+            <!-- You can add delete, ban, promote options here -->
+            <button class="btn btn-sm text-danger">Delete</button>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/footer') %>
