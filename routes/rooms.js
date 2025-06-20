@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../models/Room');
 
-// GET all rooms (index page)
+// GET /rooms - All rooms
 router.get('/', async (req, res) => {
   const rooms = await Room.find();
-  res.render('rooms/index', { rooms });
+  res.render('rooms/index', { rooms, user: req.session.user || null });
 });
 
-// ⚠️ Route for room details (after /)
+// GET /rooms/:id - Room details
 router.get('/:id', async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
     if (!room) return res.status(404).send('Room not found');
-    res.render('rooms/details', { room });
+    res.render('rooms/details', { room, user: req.session.user || null });
   } catch (err) {
     res.status(400).send('Invalid room ID');
   }

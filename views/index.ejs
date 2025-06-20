@@ -1,9 +1,32 @@
-<%- include('partials/header', { user: user }) %>
-<div class="hero">
-  <div>
-    <h1>Welcome to LuxeStay Hotels!</h1>
-    <p>Your ultimate destination for luxurious and comfortable stays.</p>
-    <a href="/rooms" class="btn-primary">Explore Rooms</a>
+<nav style="background-color: #5a3c20; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+  <h2 style="color: #fff; margin: 0;">LuxeStay Hotels</h2>
+  <ul style="list-style: none; display: flex; gap: 1rem; margin: 0;">
+    <li><a href="/rooms" style="color: #fff; text-decoration: none;">Rooms</a></li>
+    <% if (!user) { %>
+      <li><a href="/auth/login" style="color: #fff; background: #a67252; padding: 0.5rem 1rem; border-radius: 6px;">Login / Register</a></li>
+    <% } else { %>
+      <li><a href="/auth/logout" style="color: #fff;">Logout</a></li>
+    <% } %>
+  </ul>
+</nav>
+
+
+<div class="landing">
+  <div class="landing-left">
+    <h1>Welcome to <span class="brand">LuxeStay Hotels!</span></h1>
+    <p>
+      Your ultimate destination for luxurious and comfortable stays.
+      Explore our curated selection of rooms and book your perfect
+      getaway today.
+    </p>
+    <div class="landing-buttons">
+      <a href="/rooms" class="btn-primary">Explore Rooms</a>
+      <a href="/auth/register" class="btn-secondary">Join Now</a>
+    </div>
+  </div>
+  <div class="landing-right">
+    <img src="/images/hotel-lobby.jpg" alt="Hotel Lobby" />
   </div>
 </div>
-<%- include('partials/footer') %>
+
+<%- include('./partials/footer') %>
