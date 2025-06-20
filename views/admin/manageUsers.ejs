@@ -1,22 +1,29 @@
 <%- include('../partials/header') %>
-<div class="container my-4">
-  <h2>Manage Users</h2>
-  <table class="table">
-    <thead>
-      <tr><th>Username</th><th>Email</th><th>Actions</th></tr>
-    </thead>
-    <tbody>
-      <% users.forEach(u => { %>
-        <tr>
-          <td><%= u.username %></td>
-          <td><%= u.email %></td>
-          <td>
-            <!-- You can add delete, ban, promote options here -->
-            <button class="btn btn-sm text-danger">Delete</button>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+
+<div style="display: flex; min-height: 90vh;">
+  <%- include('../partials/adminSidebar') %>
+
+  <div style="flex-grow: 1; padding: 2rem;">
+    <h2>Manage Users</h2>
+    <table class="table">
+      <thead><tr><th>Username</th><th>Email</th><th>Actions</th></tr></thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.username %></td>
+            <td><%= u.email %></td>
+            <td>
+              <% if (!u.isAdmin) { %>
+                <form method="POST" action="/admin/users/<%= u._id %>/promote">
+                  <button class="btn btn-sm btn-warning">Promote</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 </div>
+
 <%- include('../partials/footer') %>

@@ -1,29 +1,48 @@
 <%- include('../partials/header') %>
-<div class="container my-4">
-  <h2>Manage Room Types</h2>
-  <a href="/admin/rooms/new" class="btn-primary mb-3">Add New Room</a>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th><th>Type</th><th>Price</th><th>Available</th><th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% rooms.forEach(room => { %>
-        <tr>
-          <td><%= room.name %></td>
-          <td><%= room.type %></td>
-          <td>$<%= room.price %></td>
-          <td><%= room.available %></td>
-          <td>
-            <a href="/admin/rooms/<%= room._id %>/edit" class="btn btn-sm">Edit</a>
-            <form method="POST" action="/admin/rooms/<%= room._id %>?_method=DELETE" style="display:inline;">
-              <button class="btn btn-sm text-danger">Delete</button>
-            </form>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
-</div>
-<%- include('../partials/footer') %>
+
+    <div style="display: flex; min-height: 90vh;">
+        <%- include('../partials/adminSidebar') %>
+
+            <div style="flex-grow: 1; padding: 2rem;">
+                <div class="container my-4">
+                    <h2>Manage Room Types</h2>
+                    <a href="/admin/rooms/new" class="btn-primary mb-3">Add New Room</a>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Available</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% rooms.forEach(room=> { %>
+                                <tr>
+                                    <td>
+                                        <%= room.name %>
+                                    </td>
+                                    <td>
+                                        <%= room.type %>
+                                    </td>
+                                    <td>$<%= room.price %>
+                                    </td>
+                                    <td>
+                                        <%= room.available %>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/rooms/<%= room._id %>/edit" class="btn btn-sm">Edit</a>
+                                        <form method="POST" action="/admin/rooms/<%= room._id %>?_method=DELETE"
+                                            style="display:inline;">
+                                            <button class="btn btn-sm text-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+            <%- include('../partials/footer') %>

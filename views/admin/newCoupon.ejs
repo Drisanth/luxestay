@@ -1,4 +1,9 @@
 <%- include('../partials/header') %>
+
+<div style="display: flex; min-height: 90vh;">
+  <%- include('../partials/adminSidebar') %>
+  
+  <div style="flex-grow: 1; padding: 2rem;">
 <div class="container my-4">
   <h2>Create Coupon</h2>
   <form action="/admin/coupons" method="POST">
@@ -8,4 +13,5 @@
     <button class="btn btn-primary">Create</button>
   </form>
 </div>
+  </div>
 <%- include('../partials/footer') %>

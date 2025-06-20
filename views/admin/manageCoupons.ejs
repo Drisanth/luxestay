@@ -1,5 +1,9 @@
 <%- include('../partials/header') %>
-<div class="container my-4">
+
+<div style="display: flex; min-height: 90vh;">
+  <%- include('../partials/adminSidebar') %>
+  
+  <div style="flex-grow: 1; padding: 2rem;">
   <h2>Manage Coupons</h2>
   <a href="/admin/coupons/new" class="btn btn-primary">+ New Coupon</a>
   <table class="table mt-3">
@@ -19,5 +23,6 @@
       <% }) %>
     </tbody>
   </table>
+</div>
 </div>
 <%- include('../partials/footer') %>

@@ -1,6 +1,9 @@
 <%- include('../partials/header') %>
 
-<div class="container my-4">
+<div style="display: flex; min-height: 90vh;">
+  <%- include('../partials/adminSidebar') %>
+  
+  <div style="flex-grow: 1; padding: 2rem;">
   <h2>Add New Room</h2>
   <form method="POST" action="/admin/rooms">
     <div class="form-group">
@@ -41,5 +44,7 @@
     <button class="btn-primary mt-3">Add Room</button>
   </form>
 </div>
+</div>
+
 
 <%- include('../partials/footer') %>
