@@ -11,7 +11,10 @@ const userSchema = new mongoose.Schema({
   address: String,               // ✅ New
   idProofNumber: String,         // ✅ New
   avatar: String,                // Already added earlier
-  isAdmin: { type: Boolean, default: false }
+  isAdmin: { type: Boolean, default: false },
+  isVerified: { type: Boolean, default: false },
+  verificationToken: String,
+
 });
 
 // Password hashing middleware

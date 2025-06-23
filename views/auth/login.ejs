@@ -3,12 +3,21 @@
 <div class="login-page">
   <div class="login-wrapper">
     <h2>Sign in to LuxeStay Hotels</h2>
+
+    <!-- ✅ Flash messages -->
+    <% if (error_msg && error_msg.length) { %>
+      <div class="flash-error"><%= error_msg[0] %></div>
+      <% if (error_msg[0].toLowerCase().includes('verify')) { %>
+        <a href="/auth/resend-verification" class="text-primary d-block mt-2">Resend verification email</a>
+      <% } %>
+    <% } %>
+
+    <% if (success_msg && success_msg.length) { %>
+      <div class="flash-success"><%= success_msg[0] %></div>
+    <% } %>
+
     <form action="/auth/login" method="POST">
       <div class="form-group">
-        <% if (error_msg) { %>
-          <div class="flash-error"><%= error_msg %></div>
-        <% } %>
-
         <label>Email or Username</label>
         <input name="identifier" placeholder="Enter your email Id" required>
       </div>

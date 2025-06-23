@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<div class="login-page">
+  <div class="login-wrapper">
+    <h2>Resend Email Verification</h2>
+
+    <% if (error_msg && error_msg.length) { %>
+      <div class="flash-error"><%= error_msg[0] %></div>
+    <% } %>
+    <% if (success_msg && success_msg.length) { %>
+      <div class="flash-success"><%= success_msg[0] %></div>
+    <% } %>
+
+    <form action="/auth/resend-verification" method="POST">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input name="email" type="email" placeholder="name@example.com" required>
+      </div>
+      <button type="submit" class="btn-login">Resend Verification Email</button>
+    </form>
+
+    <p class="register-link">
+      Already verified? <a href="/auth/login">Login</a>
+    </p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
