@@ -1,17 +1,31 @@
 <%- include('../partials/header') %>
 
 <div class="container my-5">
-  <div class="profile-card">
-    <h2 class="text-center mb-4">👤 My Profile</h2>
+  <div class="profile-card text-center">
+    <h2 class="mb-4">My Profile</h2>
 
-    <div class="profile-info">
+    <!-- 👤 Avatar Display -->
+    <div class="mb-4">
+      <img 
+        src="/avatars/<%= user.avatar || 'default.png' %>" 
+        alt="Avatar" 
+        class="rounded-circle" 
+        style="width: 140px; height: 140px; object-fit: cover; border: 2px solid #ccc;"
+      />
+    </div>
+
+    <!-- ℹ️ Profile Info -->
+    <div class="profile-info text-start">
       <p><strong>Full Name:</strong> <%= user.firstName %> <%= user.lastName %></p>
       <p><strong>Username:</strong> <%= user.username %></p>
       <p><strong>Email:</strong> <%= user.email %></p>
       <p><strong>Mobile:</strong> <%= user.mobile || 'N/A' %></p>
+      <p><strong>Address:</strong> <%= user.address || 'N/A' %></p>
+      <p><strong>ID Proof Number:</strong> <%= user.idProofNumber || 'N/A' %></p>
       <p><strong>Role:</strong> <%= user.isAdmin ? 'Admin' : 'Customer' %></p>
     </div>
 
+    <!-- ⚙️ Actions -->
     <div class="profile-actions mt-4">
       <a href="/user/edit" class="btn btn-primary">Edit Profile</a>
       <a href="/auth/logout" class="btn btn-danger ms-2">Logout</a>

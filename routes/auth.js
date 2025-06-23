@@ -10,9 +10,17 @@ router.get('/register', (req, res) => {
 
 // POST: Register new user
 router.post('/register', async (req, res) => {
-  const { username, email, password, firstName, lastName, mobile } = req.body;
+  const {
+    username,
+    email,
+    password,
+    firstName,
+    lastName,
+    mobile,
+    address,
+    idProofNumber
+  } = req.body;
 
-  // Check if user already exists
   const existing = await User.findOne({ $or: [{ email }, { username }] });
   if (existing) {
     req.flash('error', 'Email or username already in use');
@@ -22,10 +30,12 @@ router.post('/register', async (req, res) => {
   const user = new User({
     username,
     email,
-    password, // ✅ raw password — will be hashed in the schema
+    password, // Will be hashed in the schema
     firstName,
     lastName,
-    mobile
+    mobile,
+    address,
+    idProofNumber
   });
 
   await user.save();
@@ -44,30 +54,22 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
   const { identifier, password } = req.body;
 
-  console.log('🔐 Login attempt:', identifier);
-  console.log('Entered password:', password);
-
   const user = await User.findOne({
     $or: [{ email: identifier }, { username: identifier }]
   });
 
   if (!user) {
-    console.log('❌ No user found for:', identifier);
     req.flash('error', 'Invalid credentials');
     return res.redirect('/auth/login');
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
-  console.log('Stored hash:', user.password);
-  console.log('🔑 Password match:', isMatch);
-
   if (!isMatch) {
     req.flash('error', 'Invalid credentials');
     return res.redirect('/auth/login');
   }
 
   req.session.user = user;
-  console.log('✅ Login successful:', user.username);
   res.redirect(user.isAdmin ? '/admin/dashboard' : '/');
 });
 
@@ -80,19 +82,15 @@ router.get('/reset', (req, res) => {
 router.post('/reset', async (req, res) => {
   const { email, newPassword } = req.body;
 
-  console.log('🔁 Password reset request for:', email);
-  console.log('New raw password:', newPassword);
-
   const user = await User.findOne({ email });
   if (!user) {
     req.flash('error', 'User not found');
     return res.redirect('/auth/reset');
   }
 
-  user.password = newPassword; // ✅ raw password — will be hashed in schema
+  user.password = newPassword; // Will be hashed in schema
   await user.save();
 
-  console.log('✅ Password updated for:', user.username);
   req.flash('success', 'Password updated. You can now log in.');
   res.redirect('/auth/login');
 });
