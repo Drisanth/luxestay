@@ -1,28 +1,44 @@
 <%- include('../partials/header') %>
 
-<div style="display: flex; min-height: 90vh;">
+<div class="admin-layout">
   <%- include('../partials/adminSidebar') %>
-  
-  <div style="flex-grow: 1; padding: 2rem;">
-  <h2>Manage Coupons</h2>
-  <a href="/admin/coupons/new" class="btn btn-primary">+ New Coupon</a>
-  <table class="table mt-3">
-    <thead><tr><th>Code</th><th>Discount %</th><th>Expires</th><th>Actions</th></tr></thead>
-    <tbody>
-      <% coupons.forEach(c => { %>
-        <tr>
-          <td><%= c.code %></td>
-          <td><%= c.discount %></td>
-          <td><%= c.expiresAt.toDateString() %></td>
-          <td>
-            <form method="POST" action="/admin/coupons/<%= c._id %>/delete">
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </form>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+
+
+  <div class="admin-main">
+    <h2>🎟️ Manage Coupons</h2>
+
+    <div class="mb-3">
+      <a href="/admin/coupons/new" class="btn-primary">+ New Coupon</a>
+    </div>
+
+    <!-- 📋 Coupons Table -->
+    <div class="coupon-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Discount (%)</th>
+            <th>Expires</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% coupons.forEach(c => { %>
+            <tr>
+              <td><strong><%= c.code %></strong></td>
+              <td><%= c.discount %>%</td>
+              <td><%= c.expiresAt.toLocaleDateString() %></td>
+              <td>
+                <form method="POST" action="/admin/coupons/<%= c._id %>/delete" onsubmit="return confirm('Delete this coupon?')">
+                  <button class="btn-cancel btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-</div>
+
 <%- include('../partials/footer') %>

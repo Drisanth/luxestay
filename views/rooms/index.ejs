@@ -1,20 +1,54 @@
-<%- include('../partials/header', { user: user }) %>
-<div class="container my-4">
-  <h2>Explore Our Rooms</h2>
-  <div class="row">
+<%- include('../partials/header') %>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">Explore Our Rooms</h2>
+
+  <!-- 🔍 Filters -->
+  <form method="GET" action="/rooms" class="filters">
+    <select name="type">
+      <option value="">All Types</option>
+      <option value="Deluxe">Deluxe</option>
+      <option value="Standard">Standard</option>
+      <option value="Suite">Suite</option>
+    </select>
+
+    <select name="guests">
+      <option value="">Any</option>
+      <option value="1">1 Guest</option>
+      <option value="2">2 Guests</option>
+      <option value="3">3 Guests</option>
+      <option value="4">4+ Guests</option>
+    </select>
+
+    <input type="number" name="minPrice" placeholder="Min" />
+    <input type="number" name="maxPrice" placeholder="Max" />
+    <input type="date" name="checkIn" />
+    <input type="date" name="checkOut" />
+
+    <button type="submit" class="btn-clear">Clear Filters</button>
+  </form>
+
+  <!-- 🏨 Rooms -->
+  <div class="room-grid">
     <% rooms.forEach(room => { %>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="/images/rooms/<%= room._id %>.jpg" alt="<%= room.name %>">
-          <div class="card-body">
-            <h3 class="card-title"><%= room.name %></h3>
-            <p class="card-text"><%= room.description.substring(0, 80) %>…</p>
-            <p class="card-price">From $<%= room.price %>/night</p>
-            <a href="/rooms/<%= room._id %>" class="btn-primary">View Details & Book</a>
-          </div>
+      <div class="room-card">
+        <img 
+          src="/images/rooms/<%= room._id %>.jpg" 
+          alt="<%= room.name %>" 
+          onerror="this.src='/images/room-default.jpg'" 
+        />
+        <div class="room-details">
+          <h4><%= room.name %></h4>
+          <p><%= room.description %></p>
+          <p><strong>Capacity:</strong> Up to <%= room.capacity %> guests</p>
+          <p><strong>Amenities:</strong> <%= room.amenities.join(', ') %></p>
+          <p class="price">From $<%= room.price %>/night</p>
+          <p><%= room.available %> available</p>
+          <a href="/rooms/<%= room._id %>" class="btn-room">View Details & Book</a>
         </div>
       </div>
     <% }) %>
   </div>
 </div>
+
 <%- include('../partials/footer') %>

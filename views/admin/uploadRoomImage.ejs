@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <%- include('../partials/adminSidebar') %>
+
+
+  <div style="flex-grow: 1; padding: 2rem;">
+    <h2>Upload Image for "<%= room.name %>"</h2>
+
+    <form action="/admin/rooms/upload-image" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="roomId" value="<%= room._id %>" />
+
+      <div class="form-group">
+        <label>Select Image</label>
+        <input type="file" name="roomImage" accept="image/*" class="form-control" required />
+      </div>
+
+      <button class="btn-primary mt-3">Upload Image</button>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

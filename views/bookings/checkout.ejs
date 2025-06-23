@@ -1,29 +1,67 @@
-<%- include('../partials/header', { user: user }) %>
-<div class="container my-4" style="max-width:600px;">
-  <h2>Checkout – <%= room.name %></h2>
-  <p>Check-in: <%= checkIn %> | Check-out: <%= checkOut %></p>
-  <p>Guests: <%= guests %></p>
-  <p><strong>Subtotal (nights × $<%= room.price %>):</strong> $<%= total.toFixed(2) %></p>
-  <form action="/bookings" method="POST">
-    <input type="hidden" name="roomId" value="<%= room._id %>">
-    <input type="hidden" name="checkIn" value="<%= checkIn %>">
-    <input type="hidden" name="checkOut" value="<%= checkOut %>">
-    <input type="hidden" name="guests" value="<%= guests %>">
-    <div class="form-group">
-      <label>Coupon Code (if any)</label>
-      <input name="coupon" class="form-control" placeholder="e.g. WELCOME10">
-    </div>
-    <div class="form-group">
-      <label>Payment Method</label>
-      <select name="paymentMethod" class="form-control">
-        <option>UPI</option>
-        <option>Credit Card</option>
-        <option>Debit Card</option>
-        <option>Wallet</option>
-        <option>At Hotel</option>
-      </select>
-    </div>
-    <button class="btn-primary">Confirm Booking</button>
-  </form>
+<%- include('../partials/header') %>
+
+<div class="checkout-container">
+  <!-- Image Left -->
+  <div class="checkout-image">
+    <img src="/images/room-default.jpg" alt="<%= room.name %>">
+  </div>
+
+  <!-- Form Right -->
+  <div class="checkout-form">
+    <h2><%= room.name %></h2>
+    <p><%= room.description %></p>
+    <p><strong>Capacity:</strong> Up to <%= room.capacity %> guests</p>
+    <p><strong>Amenities:</strong> <%= room.amenities.join(', ') %></p>
+    <h3>$<%= room.price %>/night</h3>
+
+    <form method="POST" action="/bookings">
+      <input type="hidden" name="roomId" value="<%= room._id %>">
+
+      <div class="form-row">
+        <div>
+          <label>Check-in Date</label>
+          <input type="date" name="checkIn" value="<%= checkIn %>" required>
+        </div>
+        <div>
+          <label>Check-out Date</label>
+          <input type="date" name="checkOut" value="<%= checkOut %>" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Number of Guests</label>
+        <select name="guests" required>
+          <% for (let i = 1; i <= room.capacity; i++) { %>
+            <option value="<%= i %>" <%= guests == i ? 'selected' : '' %>><%= i %> Guest<%= i > 1 ? 's' : '' %></option>
+          <% } %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Coupon Code (if any)</label>
+        <div class="coupon-row">
+          <input type="text" name="coupon" placeholder="e.g. WELCOME10">
+          <button type="button" disabled class="apply-btn">Apply</button> <!-- Future JS functionality -->
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select name="paymentMethod" required>
+          <option value="UPI">UPI/Credit Card/Debit Card/Wallet</option>
+          <option value="At Hotel">Pay at Hotel</option>
+        </select>
+      </div>
+
+      <hr>
+      <div class="price-breakdown">
+        <p><strong>Subtotal (<%= total / room.price %> night<%= total / room.price > 1 ? 's' : '' %>):</strong> $<%= total.toFixed(2) %></p>
+        <p><strong>Total Amount:</strong> <span class="total-price">$<%= total.toFixed(2) %></span></p>
+      </div>
+
+      <button type="submit" class="proceed-btn">Proceed to Payment</button>
+    </form>
+  </div>
 </div>
+
 <%- include('../partials/footer') %>

@@ -1,50 +1,53 @@
 <%- include('../partials/header') %>
 
-<div style="display: flex; min-height: 90vh;">
+<div class="admin-layout">
   <%- include('../partials/adminSidebar') %>
-  
-  <div style="flex-grow: 1; padding: 2rem;">
-  <h2>Add New Room</h2>
-  <form method="POST" action="/admin/rooms">
-    <div class="form-group">
-      <label>Name</label>
-      <input name="name" class="form-control" required>
-    </div>
 
-    <div class="form-group">
-      <label>Type</label>
-      <input name="type" class="form-control" required>
-    </div>
 
-    <div class="form-group">
-      <label>Description</label>
-      <textarea name="description" class="form-control" required></textarea>
-    </div>
+  <div class="admin-main">
+    <h2>🛏️ Add New Room</h2>
 
-    <div class="form-group">
-      <label>Price (per night)</label>
-      <input type="number" name="price" class="form-control" required>
-    </div>
+    <div class="admin-form-wrapper mt-3">
+      <form method="POST" action="/admin/rooms">
+        <div class="form-group">
+          <label>Room Name</label>
+          <input name="name" class="form-control" required placeholder="e.g. Ocean View Deluxe">
+        </div>
 
-    <div class="form-group">
-      <label>Capacity (number of guests)</label>
-      <input type="number" name="capacity" class="form-control" required>
-    </div>
+        <div class="form-group">
+          <label>Type</label>
+          <input name="type" class="form-control" required placeholder="e.g. Deluxe, Suite, Standard">
+        </div>
 
-    <div class="form-group">
-      <label>Amenities (comma-separated)</label>
-      <input name="amenities" class="form-control" placeholder="WiFi, AC, TV" required>
-    </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" class="form-control" rows="3" required placeholder="Brief description of the room..."></textarea>
+        </div>
 
-    <div class="form-group">
-      <label>Available Rooms</label>
-      <input type="number" name="available" class="form-control" required>
-    </div>
+        <div class="form-group">
+          <label>Price (per night)</label>
+          <input type="number" name="price" class="form-control" required placeholder="e.g. 150">
+        </div>
 
-    <button class="btn-primary mt-3">Add Room</button>
-  </form>
+        <div class="form-group">
+          <label>Capacity (number of guests)</label>
+          <input type="number" name="capacity" class="form-control" required placeholder="e.g. 2">
+        </div>
+
+        <div class="form-group">
+          <label>Amenities (comma-separated)</label>
+          <input name="amenities" class="form-control" required placeholder="WiFi, AC, TV, Balcony">
+        </div>
+
+        <div class="form-group">
+          <label>Available Rooms</label>
+          <input type="number" name="available" class="form-control" required placeholder="e.g. 5">
+        </div>
+
+        <button class="btn-primary mt-3">➕ Add Room</button>
+      </form>
+    </div>
+  </div>
 </div>
-</div>
-
 
 <%- include('../partials/footer') %>
