@@ -1,18 +1,18 @@
 <%- include('../partials/header') %>
 
-<div class="container my-5">
+<div class="container-rooms">
   <h2 class="text-center mb-4">Explore Our Rooms</h2>
 
   <!-- 🔍 Filters -->
-  <form method="GET" action="/rooms" class="filters">
-    <select name="type">
+  <form class="filters" id="filterForm" onsubmit="event.preventDefault();">
+    <select id="filterType">
       <option value="">All Types</option>
       <option value="Deluxe">Deluxe</option>
       <option value="Standard">Standard</option>
       <option value="Suite">Suite</option>
     </select>
 
-    <select name="guests">
+    <select id="filterGuests">
       <option value="">Any</option>
       <option value="1">1 Guest</option>
       <option value="2">2 Guests</option>
@@ -20,18 +20,21 @@
       <option value="4">4+ Guests</option>
     </select>
 
-    <input type="number" name="minPrice" placeholder="Min" />
-    <input type="number" name="maxPrice" placeholder="Max" />
-    <input type="date" name="checkIn" />
-    <input type="date" name="checkOut" />
+    <input type="number" id="minPrice" placeholder="Min" />
+    <input type="number" id="maxPrice" placeholder="Max" />
+    <input type="date" id="checkIn" />
+    <input type="date" id="checkOut" />
 
-    <button type="submit" class="btn-clear">Clear Filters</button>
+    <button type="reset" class="btn-clear" onclick="resetFilters()">Clear Filters</button>
   </form>
 
   <!-- 🏨 Rooms -->
-  <div class="room-grid">
+  <div class="room-grid" id="roomGrid">
     <% rooms.forEach(room => { %>
-      <div class="room-card">
+      <div class="room-card"
+        data-type="<%= room.type %>"
+        data-capacity="<%= room.capacity %>"
+        data-price="<%= room.price %>">
         <img 
           src="/images/rooms/<%= room._id %>.jpg" 
           alt="<%= room.name %>" 
@@ -50,5 +53,52 @@
     <% }) %>
   </div>
 </div>
+
+<script>
+  const typeFilter = document.getElementById('filterType');
+  const guestsFilter = document.getElementById('filterGuests');
+  const minPrice = document.getElementById('minPrice');
+  const maxPrice = document.getElementById('maxPrice');
+  const roomCards = document.querySelectorAll('.room-card');
+
+  function filterRooms() {
+    const selectedType = typeFilter.value;
+    const guests = parseInt(guestsFilter.value) || 0;
+    const min = parseFloat(minPrice.value) || 0;
+    const max = parseFloat(maxPrice.value) || Infinity;
+
+    roomCards.forEach(card => {
+      const roomType = card.dataset.type;
+      const capacity = parseInt(card.dataset.capacity);
+      const price = parseFloat(card.dataset.price);
+
+      const typeMatch = !selectedType || roomType === selectedType;
+      const guestsMatch = !guests || capacity >= guests;
+      const priceMatch = price >= min && price <= max;
+
+      if (typeMatch && guestsMatch && priceMatch) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function resetFilters() {
+    typeFilter.value = '';
+    guestsFilter.value = '';
+    minPrice.value = '';
+    maxPrice.value = '';
+    filterRooms();
+  }
+
+  // Attach events
+  [typeFilter, guestsFilter, minPrice, maxPrice].forEach(input => {
+    input.addEventListener('change', filterRooms);
+  });
+
+  // Initialize on load
+  window.addEventListener('DOMContentLoaded', filterRooms);
+</script>
 
 <%- include('../partials/footer') %>

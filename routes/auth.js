@@ -12,15 +12,22 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
   const { username, email, password, firstName, lastName, mobile } = req.body;
 
-  // Check if email or username already exists (optional)
+  // Check if user already exists
   const existing = await User.findOne({ $or: [{ email }, { username }] });
-if (existing) {
-  req.flash('error', 'Email or username already in use');
-  return res.redirect('/auth/register');
-}
+  if (existing) {
+    req.flash('error', 'Email or username already in use');
+    return res.redirect('/auth/register');
+  }
 
-  const hashedPassword = await bcrypt.hash(password, 12);
-  const user = new User({ username, email, password: hashedPassword, firstName, lastName, mobile });
+  const user = new User({
+    username,
+    email,
+    password, // ✅ raw password — will be hashed in the schema
+    firstName,
+    lastName,
+    mobile
+  });
+
   await user.save();
   req.session.user = user;
   res.redirect('/rooms');
@@ -37,41 +44,55 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
   const { identifier, password } = req.body;
 
+  console.log('🔐 Login attempt:', identifier);
+  console.log('Entered password:', password);
+
   const user = await User.findOne({
     $or: [{ email: identifier }, { username: identifier }]
   });
 
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user) {
+    console.log('❌ No user found for:', identifier);
+    req.flash('error', 'Invalid credentials');
+    return res.redirect('/auth/login');
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  console.log('Stored hash:', user.password);
+  console.log('🔑 Password match:', isMatch);
+
+  if (!isMatch) {
     req.flash('error', 'Invalid credentials');
     return res.redirect('/auth/login');
   }
 
   req.session.user = user;
+  console.log('✅ Login successful:', user.username);
   res.redirect(user.isAdmin ? '/admin/dashboard' : '/');
 });
 
 // GET: Password reset form
 router.get('/reset', (req, res) => {
-  res.render('auth/resetPassword', {
-    user: null
-  });
+  res.render('auth/resetPassword', { user: null });
 });
 
-// POST: Password reset submit
+// POST: Password reset
 router.post('/reset', async (req, res) => {
   const { email, newPassword } = req.body;
 
-  const user = await User.findOne({ email });
+  console.log('🔁 Password reset request for:', email);
+  console.log('New raw password:', newPassword);
 
+  const user = await User.findOne({ email });
   if (!user) {
     req.flash('error', 'User not found');
     return res.redirect('/auth/reset');
   }
 
-  const hashed = await bcrypt.hash(newPassword, 12);
-  user.password = hashed;
+  user.password = newPassword; // ✅ raw password — will be hashed in schema
   await user.save();
 
+  console.log('✅ Password updated for:', user.username);
   req.flash('success', 'Password updated. You can now log in.');
   res.redirect('/auth/login');
 });

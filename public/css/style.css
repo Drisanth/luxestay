@@ -225,8 +225,6 @@ body {
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
   overflow: hidden;
   margin-bottom: 2rem;
-  /* ❌ Removed max-height to prevent content clipping */
-  /* max-height: 250px; */
   min-height: 220px;
 }
 
@@ -330,6 +328,11 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
+}
+.container-rooms {
+  margin: 0px;
+  padding: 2rem;
+  background-color: #f7eee2;
 }
 
 .filters {
@@ -536,7 +539,12 @@ select {
   display: flex;
   max-width: 1100px;
   margin: 3rem auto;
-  background: #fff;
+  background-image:
+  linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+  url('../images/login-register.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
@@ -1030,12 +1038,41 @@ body { background: #f9f9f9; color: #333; }
 a { text-decoration:none; color: inherit; }
 
 /* ========== Header / Nav ========== */
-.navbar { background: #fff; border-bottom: 1px solid #e0e0e0; }
-.navbar .container { display:flex; align-items:center; justify-content:space-between; padding: 1rem; }
-.navbar-brand { font-size:1.5rem; font-weight:700; color:#222; }
-.navbar-nav { list-style:none; display:flex; gap:1rem; }
-.navbar-nav li a { padding:0.5rem 1rem; border-radius:4px; transition: background .2s; }
-.navbar-nav li a:hover { background:#f0f0f0; }
+.navbar {
+  background: #5a3c20; /* Changed from #110101 */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white; /* Changed from #222 */
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-nav li a {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+  color: white; /* Make nav links white */
+  text-decoration: none;
+}
+
+.navbar-nav li a:hover {
+  background: rgba(255, 255, 255, 0.2); /* light hover effect on dark background */
+}
 
 /* ========== Hero ========== */
 .hero { background:url('/images/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; }

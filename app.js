@@ -47,6 +47,8 @@ app.use('/rooms', require('./routes/rooms'));
 app.use('/auth', require('./routes/auth'));
 app.use('/admin', require('./routes/admin'));
 app.use('/bookings', require('./routes/bookings'));
+app.use('/user', require('./routes/user'));
+
 
 
 // ✅ Start server

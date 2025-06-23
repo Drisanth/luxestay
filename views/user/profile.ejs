@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="container my-5">
+  <div class="profile-card">
+    <h2 class="text-center mb-4">👤 My Profile</h2>
+
+    <div class="profile-info">
+      <p><strong>Full Name:</strong> <%= user.firstName %> <%= user.lastName %></p>
+      <p><strong>Username:</strong> <%= user.username %></p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Mobile:</strong> <%= user.mobile || 'N/A' %></p>
+      <p><strong>Role:</strong> <%= user.isAdmin ? 'Admin' : 'Customer' %></p>
+    </div>
+
+    <div class="profile-actions mt-4">
+      <a href="/user/edit" class="btn btn-primary">Edit Profile</a>
+      <a href="/auth/logout" class="btn btn-danger ms-2">Logout</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
