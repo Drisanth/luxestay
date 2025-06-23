@@ -1074,6 +1074,143 @@ a { text-decoration:none; color: inherit; }
   background: rgba(255, 255, 255, 0.2); /* light hover effect on dark background */
 }
 
+/* 📄 Profile Card */
+.profile-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  margin: auto;
+}
+
+.profile-card h2 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.profile-card img {
+  border: 3px solid #ddd;
+}
+
+/* ℹ️ Profile Info Section */
+.profile-info {
+  margin-top: 1rem;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.profile-info p {
+  margin-bottom: 0.4rem;
+}
+
+/* ⚙️ Action Buttons */
+.profile-actions .btn {
+  min-width: 140px;
+}
+
+/* 💳 Booking History */
+.profile-bookings {
+  margin-top: 3rem;
+}
+
+.profile-bookings h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.booking-history-card {
+  background: #f9f9f9;
+  border-left: 5px solid #5a3c20;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.booking-history-card h5 {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  color: #5a3c20;
+}
+
+.booking-history-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.status.upcoming {
+  color: #0a7e07;
+  font-weight: 600;
+}
+
+.status.completed {
+  color: #555;
+}
+
+.status.cancelled {
+  color: #d00;
+  font-weight: 600;
+}
+.recent-bookings {
+  margin-top: 3rem;
+}
+
+.recent-bookings h4 {
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+/* 📦 Booking Card Styling */
+.booking-history-card {
+  background: #fefefe;
+  border-left: 4px solid #8d5e3c;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.booking-history-card:hover {
+  transform: scale(1.01);
+}
+
+.booking-history-card h5 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #5a3c20;
+}
+
+.booking-history-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* 🔖 Status Tags */
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.status.upcoming {
+  background: #e6f7ec;
+  color: #117c1d;
+}
+
+.status.completed {
+  background: #eaeaea;
+  color: #555;
+}
+
+.status.cancelled {
+  background: #fce8e8;
+  color: #c00;
+}
 /* ========== Hero ========== */
 .hero { background:url('/images/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; }
 .hero h1 { font-size:3rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }

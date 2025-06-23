@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
   }
 
   req.session.user = user;
-  res.redirect(user.isAdmin ? '/admin/dashboard' : '/');
+  res.redirect(user.isAdmin ? '/admin/dashboard' : '/rooms');
 });
 
 // GET: Password reset form

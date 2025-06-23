@@ -3,6 +3,8 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const User = require('../models/User');
+const Booking = require('../models/Booking');
+
 
 const router = express.Router();
 
@@ -24,8 +26,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ✅ GET: Profile page
-router.get('/profile', ensureAuth, (req, res) => {
-  res.render('user/profile', { user: req.session.user });
+router.get('/profile', ensureAuth, async (req, res) => {
+  const bookings = await Booking.find({ user: req.session.user._id })
+    .populate('room')
+    .sort({ createdAt: -1 })
+    .limit(3); // adjust the limit as needed
+
+  res.render('user/profile', { user: req.session.user, bookings });
 });
 
 // ✅ GET: Edit profile page
@@ -69,6 +76,34 @@ router.post('/edit', ensureAuth, upload.single('avatar'), async (req, res) => {
 
   req.session.user = user; // 🔄 Update session
   res.redirect('/user/profile');
+});
+router.post('/delete', ensureAuth, async (req, res) => {
+  const userId = req.session.user._id;
+
+  try {
+    // 1. Delete avatar if uploaded
+    const user = await User.findById(userId);
+    if (user.avatar) {
+      const avatarPath = path.join(__dirname, '..', 'public', 'avatars', user.avatar);
+      if (fs.existsSync(avatarPath)) {
+        fs.unlinkSync(avatarPath);
+      }
+    }
+
+    // 2. Delete user's bookings
+    await Booking.deleteMany({ user: userId });
+
+    // 3. Delete user account
+    await User.findByIdAndDelete(userId);
+
+    // 4. Clear session and redirect
+    req.session.destroy(() => {
+      res.redirect('/auth/register');
+    });
+  } catch (err) {
+    console.error('❌ Error deleting account:', err);
+    res.status(500).send('Something went wrong. Please try again.');
+  }
 });
 
 module.exports = router;

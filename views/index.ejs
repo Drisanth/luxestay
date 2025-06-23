@@ -1,11 +1,35 @@
-<nav style="background-color: #5a3c20; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
-  <h2 style="color: #fff; margin: 0;">LuxeStay Hotels</h2>
-  <ul style="list-style: none; display: flex; gap: 1rem; margin: 0;">
-    <li><a href="/rooms" style="color: #fff; text-decoration: none;">Rooms</a></li>
+<nav style="
+  background-color: #5a3c20;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #d9c8b4; /* subtle gold/cream line */
+  font-family: 'Georgia', serif; /* elegant serif font */
+">
+  <h2 style="color: #fff; margin: 0; font-size: 1.8rem; letter-spacing: 1px;">LuxeStay Hotels</h2>
+  
+  <ul style="list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;">
+    <li>
+      <a href="/rooms" style="color: #fff; text-decoration: none; font-size: 1rem;">Rooms</a>
+    </li>
     <% if (!user) { %>
-      <li><a href="/auth/login" style="color: #fff; background: #a67252; padding: 0.5rem 1rem; border-radius: 6px;">Login / Register</a></li>
+      <li>
+        <a href="/auth/login" style="
+          color: #fff;
+          background: #a67252;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+          text-decoration: none;
+          font-weight: 500;
+          transition: background 0.3s;
+        ">Login / Register</a>
+      </li>
     <% } else { %>
-      <li><a href="/auth/logout" style="color: #fff;">Logout</a></li>
+      <li>
+        <a href="/auth/logout" style="color: #fff; text-decoration: none;">Logout</a>
+      </li>
     <% } %>
   </ul>
 </nav>
