@@ -32,18 +32,21 @@ router.post('/register', async (req, res) => {
 
   const token = crypto.randomBytes(32).toString('hex');
 
+  const isAdmin = req.body.isAdmin === 'true'; 
   const user = new User({
     username,
     email,
-    password, // 🔒 Hashed via pre-save hook
+    password,
     firstName,
     lastName,
     mobile,
     address,
     idProofNumber,
-    verificationToken: token,
-    isVerified: false
+    isAdmin,
+    isVerified: isAdmin, // 👈 Auto-verify if admin
+    verificationToken: isAdmin ? undefined : token
   });
+
 
   await user.save();
 

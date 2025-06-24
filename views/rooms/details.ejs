@@ -1,14 +1,17 @@
 <%- include('../partials/header') %>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <div class="checkout-container">
   <!-- Room Image -->
- <div class="checkout-image">
-  <img 
-    src="/images/rooms/<%= room._id %>.jpg"
-    alt="<%= room.name %>"
-    onerror="this.src='/images/room-default.jpg'"
-  >
-</div>
+  <div class="checkout-image">
+    <img 
+      src="/images/rooms/<%= room._id %>.jpg"
+      alt="<%= room.name %>"
+      onerror="this.src='/images/room-default.jpg'"
+    >
+  </div>
 
   <!-- Booking Form -->
   <div class="checkout-form">
@@ -16,7 +19,7 @@
     <p><%= room.description %></p>
     <p><strong>Capacity:</strong> Up to <%= room.capacity %> guests</p>
     <p><strong>Amenities:</strong> <%= room.amenities.join(', ') %></p>
-    <h3>$<%= room.price %>/night</h3>
+    <h3>₹<%= room.price %>/night</h3>
 
     <form action="/bookings/checkout" method="GET">
       <input type="hidden" name="roomId" value="<%= room._id %>">
@@ -24,11 +27,11 @@
       <div class="form-row">
         <div>
           <label>Check-in</label>
-          <input type="date" name="checkIn" required>
+          <input type="text" id="checkIn" name="checkIn" required>
         </div>
         <div>
           <label>Check-out</label>
-          <input type="date" name="checkOut" required>
+          <input type="text" id="checkOut" name="checkOut" required>
         </div>
       </div>
 
@@ -45,5 +48,31 @@
     </form>
   </div>
 </div>
+
+<script>
+  const roomId = "<%= room._id %>";
+  let disabledDates = [];
+
+  fetch(`/rooms/${roomId}/availability`)
+    .then(res => res.json())
+    .then(data => {
+      disabledDates = data.unavailableDates || [];
+
+      flatpickr("#checkIn", {
+        dateFormat: "Y-m-d",
+        disable: disabledDates,
+        minDate: "today",
+        onChange: function(selectedDates, dateStr, instance) {
+          checkOutPicker.set("minDate", dateStr);
+        }
+      });
+
+      var checkOutPicker = flatpickr("#checkOut", {
+        dateFormat: "Y-m-d",
+        disable: disabledDates,
+        minDate: "today"
+      });
+    });
+</script>
 
 <%- include('../partials/footer') %>
