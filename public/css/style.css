@@ -1311,6 +1311,28 @@ a { text-decoration:none; color: inherit; }
     background-color: rgba(0, 0, 0, 0.3);
   }
 }
+.payment-status {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.payment-status.paid {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.payment-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.payment-status.failed {
+  background-color: #f8d7da;
+  color: #721c24;
+}
 
 /* ========== Hero ========== */
 .hero { background:url('/images/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; }
