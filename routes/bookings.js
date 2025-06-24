@@ -89,7 +89,8 @@ router.post('/', isLoggedIn, async (req, res) => {
         guests,
         totalPrice,
         paymentMethod,
-        status: paymentMethod === 'At Hotel' ? 'PENDING' : 'COMPLETED'
+        status: paymentMethod === 'At Hotel' ? 'PENDING' : 'COMPLETED',
+        paymentStatus: paymentMethod === 'At Hotel' ? 'PENDING' : 'PAID'
     });
 
     await booking.save();

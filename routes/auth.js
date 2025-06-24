@@ -152,6 +152,36 @@ router.post('/resend-verification', async (req, res) => {
   res.redirect('/auth/login');
 });
 
+// GET: Reset Password Page
+router.get('/resetPassword', (req, res) => {
+  res.render('auth/resetPassword', {
+    user: null,
+    messages: {
+      error: req.flash('error'),
+      success: req.flash('success')
+    }
+  });
+});
+
+// POST: Handle Reset Password Submission
+router.post('/resetPassword', async (req, res) => {
+  const { email, newPassword } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    req.flash('error', 'No account found with that email.');
+    return res.redirect('/auth/resetPassword');
+  }
+
+  // Hash the new password
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(newPassword, salt);
+  await user.save();
+
+  req.flash('success', 'Password reset successfully. You can now log in.');
+  res.redirect('/auth/login');
+});
+
 // GET: Logout
 router.get('/logout', (req, res) => {
   req.session.destroy(() => {

@@ -8,9 +8,10 @@ const bookingSchema = new mongoose.Schema({
   guests: Number,
   totalPrice: Number,
   paymentMethod: String,
-  status: { type: String, enum: ['PENDING', 'COMPLETED'], default: 'PENDING' }
+  status: { type: String, enum: ['PENDING', 'COMPLETED'], default: 'PENDING' },
+  paymentStatus: { type: String, enum: ['PAID', 'PENDING', 'FAILED'], default: 'PENDING' } // ✅ New field
 }, {
-  timestamps: true  // ✅ Add this line
+  timestamps: true
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);

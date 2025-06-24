@@ -35,15 +35,17 @@
                             </p>
                             <p><strong>Total Price:</strong> $<%= b.totalPrice.toFixed(2) %>
                             </p>
-                            <p><strong>Payment:</strong>
-                                <%= b.paymentMethod %>
+                            <p><strong>Payment:</strong> <%= b.paymentMethod %></p>
+                            <p><strong>Payment Status:</strong>
+                                <span class="payment-status <%= b.paymentStatus.toLowerCase() %>">
+                                    <%= b.paymentStatus %>
+                                </span>
                             </p>
                             <p><strong>Booked on:</strong>
                                 <%= new Date(b.createdAt).toLocaleString() %>
                             </p>
                         </div>
                     </div>
-
                     <div class="booking-actions">
                         <a href="/rooms/<%= b.room._id %>" class="btn-link">View Room</a>
 
