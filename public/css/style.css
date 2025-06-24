@@ -210,6 +210,27 @@ body {
 .btn-login:hover {
   background-color: #6c4329;
 }
+
+/*register-form*/
+#password-strength {
+  height: 6px;
+  background: #ddd;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+#strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: 0.3s ease-in-out;
+  border-radius: 4px;
+}
+.input-msg {
+  font-size: 0.85rem;
+  color: #a00;
+  margin-top: 4px;
+  display: block;
+}
+
 /*version 2 bookings*/
 .container {
   max-width: 1200px;

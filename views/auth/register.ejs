@@ -5,49 +5,59 @@
     <h2>Create your account at<br>LuxeStay Hotels</h2>
 
     <% if (Array.isArray(error_msg) && error_msg.length > 0) { %>
-      <div class="flash-error"><%= error_msg[0] %></div>
+      <div class="flash-error" id="flashError"><%= error_msg[0] %></div>
     <% } %>
 
-    <form action="/auth/register" method="POST">
+    <form id="registerForm" action="/auth/register" method="POST">
       <div class="form-group">
         <label>Username</label>
-        <input name="username" placeholder="Username" required>
+        <input id="username" name="username" placeholder="Username" required>
       </div>
 
       <div class="form-group">
         <label>Email Address</label>
-        <input name="email" type="email" placeholder="name@example.com" required>
+        <input id="email" name="email" type="email" placeholder="name@example.com" required>
       </div>
 
       <div class="form-row">
         <div class="form-group half">
           <label>First Name</label>
-          <input name="firstName" placeholder="First name" required>
+          <input id="firstName" name="firstName" placeholder="First name" required>
         </div>
         <div class="form-group half">
           <label>Last Name</label>
-          <input name="lastName" placeholder="Last name" required>
+          <input id="lastName" name="lastName" placeholder="Last name" required>
         </div>
       </div>
 
       <div class="form-group">
         <label>Mobile Number</label>
-        <input name="mobile" placeholder="Enter with country code" required>
+        <input id="mobile" name="mobile" placeholder="Enter with country code" required>
       </div>
 
       <div class="form-group">
         <label>Address</label>
-        <input name="address" placeholder="Your full address" required>
+        <input id="address" name="address" placeholder="Your full address" required>
       </div>
 
       <div class="form-group">
         <label>ID Proof Number</label>
-        <input name="idProofNumber" placeholder="Govt. issued ID number" required>
+        <input id="idProofNumber" name="idProofNumber" placeholder="Govt. issued ID number" required>
       </div>
 
       <div class="form-group">
         <label>Password</label>
-        <input name="password" type="password" placeholder="Password" required>
+        <input id="password" name="password" type="password" placeholder="Password" required>
+        <div id="password-strength">
+          <div id="strength-bar"></div>
+        </div>
+        <small id="password-msg" class="input-msg"></small>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Re-enter Password" required>
+        <small id="confirm-msg" class="input-msg"></small>
       </div>
 
       <button type="submit" class="btn-login">Create Account</button>
@@ -57,4 +67,117 @@
   </div>
 </div>
 
+<script>
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('confirmPassword');
+  const passwordMsg = document.getElementById('password-msg');
+  const confirmMsg = document.getElementById('confirm-msg');
+  const strengthBar = document.getElementById('strength-bar');
+  const form = document.getElementById('registerForm');
+
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const mobileRegex = /^[0-9]{10}$/;
+
+  function showStrength(pwd) {
+    let strength = 0;
+    if (pwd.length >= 8) strength++;
+    if (/[A-Z]/.test(pwd)) strength++;
+    if (/\d/.test(pwd)) strength++;
+    if (/[@$!%*?&]/.test(pwd)) strength++;
+
+    const percent = (strength / 4) * 100;
+    strengthBar.style.width = percent + '%';
+    strengthBar.style.background = percent < 50 ? 'red' : percent < 75 ? 'orange' : 'green';
+  }
+
+  password.addEventListener('input', () => {
+    const val = password.value;
+    showStrength(val);
+
+    if (!passwordRegex.test(val)) {
+      passwordMsg.textContent = 'Password must have 8+ chars, 1 uppercase & 1 number.';
+    } else {
+      passwordMsg.textContent = '';
+    }
+  });
+
+  confirmPassword.addEventListener('input', () => {
+    if (confirmPassword.value !== password.value) {
+      confirmMsg.textContent = 'Passwords do not match.';
+    } else {
+      confirmMsg.textContent = '';
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const idProof = document.getElementById('idProofNumber').value.trim();
+    const pwd = password.value;
+    const confirmPwd = confirmPassword.value;
+
+    if (!username || !email || !firstName || !lastName || !mobile || !address || !idProof || !pwd || !confirmPwd) {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'warning',
+        title: 'All fields are required!',
+        text: 'Please complete the form before submitting.',
+      });
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Email',
+        text: 'Please enter a valid email address.',
+      });
+      return;
+    }
+
+    if (!mobileRegex.test(mobile)) {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Mobile Number',
+        text: 'Mobile number must be exactly 10 digits.',
+      });
+      return;
+    }
+
+    if (!passwordRegex.test(pwd)) {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Weak Password',
+        html: 'Password must be at least 8 characters,<br>include one uppercase letter and one number.',
+      });
+      return;
+    }
+
+    if (pwd !== confirmPwd) {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Passwords do not match',
+        text: 'Please make sure both passwords are the same.',
+      });
+      return;
+    }
+  });
+
+  // Hide server error on typing
+  const flashError = document.getElementById('flashError');
+  if (flashError) {
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => flashError.style.display = 'none');
+    });
+  }
+</script>
 <%- include('../partials/footer') %>
