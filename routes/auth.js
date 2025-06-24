@@ -105,6 +105,10 @@ router.post('/login', async (req, res) => {
     req.flash('error', 'Please verify your email before logging in.');
     return res.redirect('/auth/login');
   }
+   if (user.isBlocked) {
+    req.flash('error', 'Your account has been blocked by the admin.');
+    return res.redirect('/auth/login');
+  }
 
   req.session.user = user;
   res.redirect(user.isAdmin ? '/admin/dashboard' : '/rooms');

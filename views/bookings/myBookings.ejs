@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="container my-5">
         <h2>My Bookings</h2>
@@ -50,15 +51,34 @@
                         <a href="/rooms/<%= b.room._id %>" class="btn-link">View Room</a>
 
                         <% if (b.dynamicStatus === 'UPCOMING') { %>
-                            <a href="/bookings/cancel/<%= b._id %>" class="btn-cancel">Cancel Booking</a>
+                        <a href="#" 
+                            class="btn-cancel" 
+                            onclick="confirmCancellation('<%= b._id %>'); return false;">
+                            Cancel Booking
+                        </a>
                         <% } %>
-
                         <a href="/bookings/<%= b._id %>/invoice" class="btn-secondary">Download Invoice</a>
                         </div>
                 </div>
             </div>
             <% }) %>
     </div>
-
-
-    <%- include('../partials/footer') %>
+    <script>
+    function confirmCancellation(bookingId) {
+        Swal.fire({
+        title: 'Cancel Booking?',
+        text: "Are you sure you want to cancel this booking?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, cancel it',
+        background: '#fff',
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = `/bookings/cancel/${bookingId}`;
+        }
+        });
+    }
+    </script>
+<%- include('../partials/footer') %>
