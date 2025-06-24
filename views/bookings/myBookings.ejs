@@ -1,19 +1,62 @@
-<%- include('../partials/header', { user: user }) %>
-<div class="container my-4">
-  <h2>My Bookings</h2>
-  <% bookings.forEach(b => { %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5>Booking ID: <%= b._id %></h5>
-        <p>Check-in: <%= b.checkIn.toDateString() %> – Check-out: <%= b.checkOut.toDateString() %></p>
-        <p>Guests: <%= b.guests %> | Total: $<%= b.totalPrice.toFixed(2) %></p>
-        <p>Status: <span class="<%= b.status.toLowerCase() %>"><%= b.status %></span></p>
-        <a href="/rooms/<%= b.room._id %>" class="btn-primary">View Room Details</a>
-        <% if (b.status==='PENDING') { %>
-          <a href="/bookings/cancel/<%= b._id %>" class="btn btn-link text-danger">Cancel Booking</a>
-        <% } %>
-      </div>
+<%- include('../partials/header') %>
+
+    <div class="container my-5">
+        <h2>My Bookings</h2>
+
+        <% bookings.forEach(b=> { %>
+            <div class="booking-card">
+                <div class="booking-left">
+                    <img src="/images/room-default1.jpg" alt="Room Image">
+                </div>
+
+                <div class="booking-right">
+                    <div>
+                        <div class="booking-header">
+                            <h4>
+                                <%= b.room?.name %>
+                            </h4>
+                            <span class="status <%= b.dynamicStatus.toLowerCase() %>">
+                                <%= b.dynamicStatus %>
+                            </span>
+                        </div>
+
+                        <div class="booking-info">
+                            <p><strong>Booking ID:</strong>
+                                <%= String(b._id).slice(-6) %>
+                            </p>
+                            <p><strong>Guests:</strong>
+                                <%= b.guests %>
+                            </p>
+                            <p><strong>Check-in:</strong>
+                                <%= new Date(b.checkIn).toDateString() %>
+                            </p>
+                            <p><strong>Check-out:</strong>
+                                <%= new Date(b.checkOut).toDateString() %>
+                            </p>
+                            <p><strong>Total Price:</strong> $<%= b.totalPrice.toFixed(2) %>
+                            </p>
+                            <p><strong>Payment:</strong>
+                                <%= b.paymentMethod %>
+                            </p>
+                            <p><strong>Booked on:</strong>
+                                <%= new Date(b.createdAt).toLocaleString() %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="booking-actions">
+                        <a href="/rooms/<%= b.room._id %>" class="btn-link">View Room</a>
+
+                        <% if (b.dynamicStatus === 'UPCOMING') { %>
+                            <a href="/bookings/cancel/<%= b._id %>" class="btn-cancel">Cancel Booking</a>
+                        <% } %>
+
+                        <a href="/bookings/<%= b._id %>/invoice" class="btn-secondary">Download Invoice</a>
+                        </div>
+                </div>
+            </div>
+            <% }) %>
     </div>
-  <% }) %>
-</div>
-<%- include('../partials/footer') %>
+
+
+    <%- include('../partials/footer') %>

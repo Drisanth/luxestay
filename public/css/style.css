@@ -1,44 +1,1321 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4a3c2d;
+  background-color: #fdfdfb;
+}
+
+.landing {
+  display: flex;
+  min-height: 90vh;
+}
+
+.landing-left {
+  flex: 1;
+  background: linear-gradient(to bottom, #f8f1e8, #fdfdfb);
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.landing-left h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #5a3c20;
+}
+
+.landing-left .brand {
+  color: #5a3c20;
+  font-weight: bold;
+}
+
+.landing-left p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #6b5b4a;
+  max-width: 450px;
+}
+
+.landing-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background-color: #8d5e3c;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #754929;
+}
+
+.btn-secondary {
+  background-color: #3d2b1f;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #2c1f15;
+}
+
+.landing-right {
+  flex: 1;
+  overflow: hidden;
+}
+
+.landing-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*version 2 login*/
+/* Login Page Styling */
+.login-page {
+  min-height: 90vh;
+  background: url('/images/login-register.webp') no-repeat center center/cover;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-wrapper {
+  background: #f3e6d4;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.15);
+}
+
+.login-wrapper h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #5a3c20;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #3d2b1f;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #8d5e3c;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.forgot-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #3d2b1f;
+  text-decoration: underline;
+}
+
+.btn-login {
+  background-color: #8d5e3c;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-login:hover {
+  background-color: #6c4329;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+.register-link a {
+  color: #3d2b1f;
+  font-weight: 600;
+}
+
+.flash-error {
+  background: #fdd;
+  color: #a00;
+  padding: 0.75rem;
+  border: 1px solid #a00;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.flash-success {
+  background: #e2f7e2;
+  color: #1a7e1a;
+  padding: 0.75rem;
+  border: 1px solid #1a7e1a;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+.form-group.half {
+  flex: 1;
+}
+
+.login-wrapper h2 {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.btn-login {
+  background-color: #8d5e3c;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: 0.2s;
+}
+
+.btn-login:hover {
+  background-color: #6c4329;
+}
+/*version 2 bookings*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Booking Card */
+.booking-card {
+  display: flex;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  min-height: 220px;
+}
+
+/* Room Image */
+.booking-left img {
+  width: 260px;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right Content */
+.booking-right {
+  flex-grow: 1;
+  padding: 1.5rem;
+  background: #fefcf7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header */
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-header h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #3a2b1c;
+}
+
+/* Booking Status */
+.status {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border-radius: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status.pending {
+  background-color: #f9e79f;
+  color: #7d6608;
+}
+
+.status.completed {
+  background-color: #d6eaf8;
+  color: #1f618d;
+}
+
+/* Booking Info */
+.booking-info {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.booking-info p {
+  margin: 0.3rem 0;
+}
+
+/* Action Buttons */
+.booking-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Button Base Styles */
+.booking-actions a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Individual Button Styles */
+.btn-link {
+  border: 1px solid #8d5e3c;
+  color: #8d5e3c;
+  background: transparent;
+}
+
+.btn-cancel {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+/*Room frontend*/
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+.container-rooms {
+  margin: 0px;
+  padding: 2rem;
+  background-color: #f7eee2;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  justify-content: space-between;
+}
+
+.filters select,
+.filters input {
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1;
+  min-width: 130px;
+}
+
+.btn-clear {
+  background: transparent;
+  border: none;
+  color: #8d5e3c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.room-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
+}
+
+.room-card {
+  flex: 1 1 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 991px) {
+  .room-card {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .room-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+
+.room-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.room-details {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-details h4 {
+  margin: 0 0 0.5rem;
+  color: #5a3c20;
+}
+
+.room-details p {
+  margin: 0.25rem 0;
+  font-size: 0.92rem;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.btn-room {
+  margin-top: auto;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #5a3c20;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/*checkout page*/
+
+.checkout-image {
+  flex: 1;
+  max-width: 50%;
+}
+
+.checkout-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkout-form {
+  flex: 1;
+  padding: 2rem;
+  background: #fdf9f3;
+}
+
+.checkout-form h2 {
+  margin-bottom: 0.5rem;
+}
+
+.checkout-form h3 {
+  margin: 1rem 0;
+  color: #5a3c20;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row div {
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+input[type="date"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.coupon-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.coupon-row input {
+  flex: 1;
+}
+
+.apply-btn {
+  background: #8d5e3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  cursor: not-allowed; /* Placeholder */
+}
+
+.price-breakdown {
+  margin-top: 1rem;
+}
+
+.total-price {
+  color: #000;
+  font-size: 1.2rem;
+}
+
+.proceed-btn {
+  background: #332118;
+  color: white;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/*checkout 222*/
+.checkout-container {
+  display: flex;
+  max-width: 1100px;
+  margin: 3rem auto;
+  background-image:
+  linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+  url('../images/login-register.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.checkout-image {
+  flex: 1;
+  max-width: 50%;
+}
+
+.checkout-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkout-form {
+  flex: 1;
+  padding: 2rem;
+  background: #fdf9f3;
+}
+
+.checkout-form h2 {
+  margin-bottom: 0.5rem;
+}
+
+.checkout-form h3 {
+  margin: 1rem 0;
+  color: #5a3c20;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row div {
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+input[type="date"],
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.proceed-btn {
+  background: #332118;
+  color: white;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.booking-actions a {
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+
+.btn-link {
+  border: 1px solid #8d5e3c;
+  color: #8d5e3c;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-cancel {
+  background: #d9534f;
+  color: white;
+}
+
+/* === ADMIN PANEL UI === */
+.admin-layout {
+  display: flex;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 250px;
+  background-color: #4e2e1f;
+  color: #fff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-sidebar h4 {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.admin-sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.admin-sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn {
+  background: #875f44;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  margin-top: 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.logout-btn:hover {
+  background: #6e4731;
+}
+
+/* Main admin content area */
+.admin-main {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #fefaf6;
+}
+
+/* Admin stat cards */
+.admin-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.admin-card h5 {
+  font-size: 1rem;
+  color: #5c3b22;
+  margin-bottom: 0.5rem;
+}
+
+.admin-card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Booking table filters */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.08);
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+/* Table layout */
+.admin-table {
+  width: 100%;
+  background: #fff;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-table thead {
+  background-color: #f3e7d8;
+}
+
+/* Status pills */
+.status-badge {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+.status-pending {
+  background-color: #ffe7aa;
+  color: #775c11;
+}
+.status-completed {
+  background-color: #d1f2ff;
+  color: #1d7c99;
+}
+/*Bookings sidebar*/
+.admin-main {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #fefdfc;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.06);
+}
+
+.filter-bar select,
+.filter-bar input {
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 140px;
+}
+
+.booking-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.booking-table th {
+  background-color: #f8f6f4;
+  font-weight: 600;
+}
+
+.status {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 14px;
+  display: inline-block;
+}
+
+.status.pending {
+  background-color: #f9e79f;
+  color: #7d6608;
+}
+
+.status.completed {
+  background-color: #d6eaf8;
+  color: #1f618d;
+}
+
+.status.cancelled {
+  background-color: #f5b7b1;
+  color: #922b21;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+/*manage coupons*/
+
+.admin-main {
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #8d5e3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #754929;
+}
+
+/* Ensure the table section is spaced below the button */
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.coupon-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.coupon-table th, .coupon-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.coupon-table th {
+  background-color: #f5f5f5;
+  color: #5a3c20;
+}
+
+/*manageusers*/
+
+.admin-main {
+  flex-grow: 1;
+  padding: 2rem;
+  background: #fefcfb;
+}
+
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.user-table th,
+.user-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.user-table th {
+  background-color: #f7f5f2;
+  font-weight: 600;
+  color: #3d2b1f;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-promote {
+  background-color: #ffc107;
+  color: #3d2b1f;
+}
+
+.btn-promote:hover {
+  background-color: #e0a800;
+}
+
+.badge-admin {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/*sidebar admin*/
+.admin-layout {
+  display: flex;
+  overflow: hidden;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #5a3c20;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.admin-sidebar h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar ul li {
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  padding: 0.5rem 0;
+  transition: 0.2s;
+}
+
+.admin-sidebar a:hover {
+  color: #ffd7a3;
+}
+
+.logout-btn {
+  background-color: #a26e4f;
+  border: none;
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #8d5e3c;
+}
+
+.admin-main {
+  margin-left: 250px;
+  padding: 2rem;
+  flex: 1;
+  background: #fdfcf7;
+  min-height: 100vh;
+}
+
 /* ========== Reset & Base ========== */
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
 body { background: #f9f9f9; color: #333; }
 a { text-decoration:none; color: inherit; }
 
 /* ========== Header / Nav ========== */
-.navbar { background: #fff; border-bottom: 1px solid #e0e0e0; }
-.navbar .container { display:flex; align-items:center; justify-content:space-between; padding: 1rem; }
-.navbar-brand { font-size:1.5rem; font-weight:700; color:#222; }
-.navbar-nav { list-style:none; display:flex; gap:1rem; }
-.navbar-nav li a { padding:0.5rem 1rem; border-radius:4px; transition: background .2s; }
-.navbar-nav li a:hover { background:#f0f0f0; }
+.navbar {
+  background: #5a3c20; /* Changed from #110101 */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white; /* Changed from #222 */
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-nav li a {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+  color: white; /* Make nav links white */
+  text-decoration: none;
+}
+
+.navbar-nav li a:hover {
+  background: rgba(255, 255, 255, 0.2); /* light hover effect on dark background */
+}
+
+/* 📄 Profile Card */
+.profile-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  margin: auto;
+}
+
+.profile-card h2 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.profile-card img {
+  border: 3px solid #ddd;
+}
+
+/* ℹ️ Profile Info Section */
+.profile-info {
+  margin-top: 1rem;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.profile-info p {
+  margin-bottom: 0.4rem;
+}
+
+/* ⚙️ Action Buttons */
+.profile-actions .btn {
+  min-width: 140px;
+}
+
+/* 💳 Booking History */
+.profile-bookings {
+  margin-top: 3rem;
+}
+
+.profile-bookings h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.booking-history-card {
+  background: #f9f9f9;
+  border-left: 5px solid #5a3c20;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.booking-history-card h5 {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  color: #5a3c20;
+}
+
+.booking-history-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.status.upcoming {
+  color: #0a7e07;
+  font-weight: 600;
+}
+
+.status.completed {
+  color: #555;
+}
+
+.status.cancelled {
+  color: #d00;
+  font-weight: 600;
+}
+.recent-bookings {
+  margin-top: 3rem;
+}
+
+.recent-bookings h4 {
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+/* 📦 Booking Card Styling */
+.booking-history-card {
+  background: #fefefe;
+  border-left: 4px solid #8d5e3c;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.booking-history-card:hover {
+  transform: scale(1.01);
+}
+
+.booking-history-card h5 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #5a3c20;
+}
+
+.booking-history-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* 🔖 Status Tags */
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.status.upcoming {
+  background: #e6f7ec;
+  color: #117c1d;
+}
+
+.status.completed {
+  background: #eaeaea;
+  color: #555;
+}
+
+.status.cancelled {
+  background: #fce8e8;
+  color: #c00;
+}
+/* Blurred background overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px); /* Blur effect */
+  background-color: rgba(0, 0, 0, 0.3); /* Slight dark tint */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Modal content box */
+.modal-content {
+  position: relative;
+  background-color: #fdf9f3; /* Match .checkout-form */
+  color: #332118;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease-out forwards;
+  transform: scale(0.95);
+  opacity: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Close (×) button */
+.modal-content .close-modal {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #5a3c20;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-content .close-modal:hover {
+  color: #000;
+}
+
+/* Buttons inside modal */
+.modal-content button {
+  margin: 1rem 0.5rem 0;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+#confirm-booking-btn {
+  background-color: #5a3c20;
+  color: white;
+}
+
+#confirm-booking-btn:hover {
+  background-color: #402d17;
+}
+
+#cancel-booking-btn {
+  background-color: #a83232;
+  color: white;
+}
+
+#cancel-booking-btn:hover {
+  background-color: #892626;
+}
+
+/* Animations */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    backdrop-filter: blur(0);
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
 
 /* ========== Hero ========== */
 .hero { background:url('/images/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; }
 .hero h1 { font-size:3rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
 .hero p { font-size:1.2rem; margin:1rem 0; }
-
-/* ========== Buttons ========== */
-.btn-primary {
-  background: #007bff; color: #fff; padding: 0.6rem 1.2rem;
-  border: none; border-radius: 4px; transition: background .2s;
-}
-.btn-primary:hover { background: #0069d9; }
-
-/* ========== Cards (Rooms) ========== */
-.card { background:#fff; border:1px solid #e0e0e0; border-radius:6px; overflow:hidden; margin-bottom:1.5rem; }
-.card img { width:100%; height:200px; object-fit:cover; }
-.card-body { padding:1rem; }
-.card-title { font-size:1.25rem; margin-bottom:0.5rem; }
-.card-text { font-size:0.95rem; margin-bottom:1rem; color:#555; }
-.card-price { font-weight:700; font-size:1.1rem; margin-bottom:1rem; }
-
-/* ========== Forms ========== */
-.form-group { margin-bottom:1rem; }
-.form-group label { display:block; margin-bottom:0.3rem; font-weight:600; }
-.form-control {
-  width:100%; padding:0.6rem; border:1px solid #ccc; border-radius:4px;
-  transition: border .2s;
-}
-.form-control:focus { border-color:#007bff; outline:none; }
 
 /* ========== Tables (Admin) ========== */
 .table { width:100%; border-collapse:collapse; margin-top:1rem; }
@@ -48,4 +1325,8 @@ a { text-decoration:none; color: inherit; }
 .table th { background:#f5f5f5; }
 
 /* ========== Footer ========== */
-.footer { background:#fff; border-top:1px solid #e0e0e0; text-align:center; padding:1rem; margin-top:2rem; color:#777; }
+.footer { 
+  background:#fff; 
+  border-top:1px solid #e0e0e0; 
+  text-align:center; 
+  color:#777; }

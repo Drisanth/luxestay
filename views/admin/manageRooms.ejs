@@ -1,48 +1,59 @@
 <%- include('../partials/header') %>
 
-    <div style="display: flex; min-height: 90vh;">
-        <%- include('../partials/adminSidebar') %>
+<div class="admin-layout">
+  <%- include('../partials/adminSidebar') %>
 
-            <div style="flex-grow: 1; padding: 2rem;">
-                <div class="container my-4">
-                    <h2>Manage Room Types</h2>
-                    <a href="/admin/rooms/new" class="btn-primary mb-3">Add New Room</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Price</th>
-                                <th>Available</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% rooms.forEach(room=> { %>
-                                <tr>
-                                    <td>
-                                        <%= room.name %>
-                                    </td>
-                                    <td>
-                                        <%= room.type %>
-                                    </td>
-                                    <td>$<%= room.price %>
-                                    </td>
-                                    <td>
-                                        <%= room.available %>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/rooms/<%= room._id %>/edit" class="btn btn-sm">Edit</a>
-                                        <form method="POST" action="/admin/rooms/<%= room._id %>?_method=DELETE"
-                                            style="display:inline;">
-                                            <button class="btn btn-sm text-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
+
+  <div class="admin-main">
+    <div class="container my-4">
+      <h2>Manage Room Types</h2>
+      <a href="/admin/rooms/new" class="btn-primary mb-3">Add New Room</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Available</th>
+            <th>Actions</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rooms.forEach(room => { %>
+            <tr>
+              <td><%= room.name %></td>
+              <td><%= room.type %></td>
+              <td>$<%= room.price %></td>
+              <td><%= room.available %></td>
+              <td>
+                <a href="/admin/rooms/<%= room._id %>/edit" class="btn btn-sm btn-success">Edit</a>
+                <form method="POST" action="/admin/rooms/<%= room._id %>?_method=DELETE" style="display:inline;">
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+              </td>
+              <td>
+                <!-- 🖼 Upload Room Image -->
+                <form action="/admin/rooms/upload-image" method="POST" enctype="multipart/form-data" style="display:flex; flex-direction:column; gap:0.4rem;">
+                  <input type="hidden" name="roomId" value="<%= room._id %>" />
+                  <input type="file" name="roomImage" accept="image/*" required />
+                  <button type="submit" class="btn btn-sm btn-warning">Upload</button>
+                </form>
+
+                <!-- Optional: show image preview -->
+                <div style="margin-top: 0.5rem;">
+                  <img src="/images/rooms/<%= room._id %>.jpg"
+                       onerror="this.src='/images/room-default.jpg'"
+                       alt="Room image"
+                       style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px;" />
                 </div>
-            </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
     </div>
-            <%- include('../partials/footer') %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

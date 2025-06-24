@@ -1,28 +1,41 @@
 <%- include('../partials/header') %>
 
-<div style="display: flex; min-height: 90vh;">
+<div class="admin-layout">
   <%- include('../partials/adminSidebar') %>
 
-  <div style="flex-grow: 1; padding: 2rem;">
-    <h2>Manage Users</h2>
-    <table class="table">
-      <thead><tr><th>Username</th><th>Email</th><th>Actions</th></tr></thead>
-      <tbody>
-        <% users.forEach(u => { %>
+
+  <div class="admin-main">
+    <h2>👤 Manage Users</h2>
+
+    <!-- 👥 Users Table -->
+    <div class="user-table mt-3">
+      <table>
+        <thead>
           <tr>
-            <td><%= u.username %></td>
-            <td><%= u.email %></td>
-            <td>
-              <% if (!u.isAdmin) { %>
-                <form method="POST" action="/admin/users/<%= u._id %>/promote">
-                  <button class="btn btn-sm btn-warning">Promote</button>
-                </form>
-              <% } %>
-            </td>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
           </tr>
-        <% }) %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% users.forEach(u => { %>
+            <tr>
+              <td><%= u.username %></td>
+              <td><%= u.email %></td>
+              <td>
+                <% if (!u.isAdmin) { %>
+                  <form method="POST" action="/admin/users/<%= u._id %>/promote" onsubmit="return confirm('Promote this user to admin?')">
+                    <button class="btn-promote btn-sm">Promote</button>
+                  </form>
+                <% } else { %>
+                  <span class="badge-admin">Admin</span>
+                <% } %>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

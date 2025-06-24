@@ -1,11 +1,16 @@
-<div style="width: 250px; background: #f8f9fa; padding: 1rem; border-right: 1px solid #ddd; height: 100%;">
-  <h4>Admin Panel</h4>
-  <ul style="list-style: none; padding-left: 0;">
-    <li><a href="/admin/dashboard" style="display: block; padding: 0.5rem;">📊 Dashboard</a></li>
-    <li><a href="/admin/users" style="display: block; padding: 0.5rem;">👤 Manage Users</a></li>
-    <li><a href="/admin/bookings" style="display: block; padding: 0.5rem;">🏨 Manage Bookings</a></li>
-    <li><a href="/admin/coupons" style="display: block; padding: 0.5rem;">🎟️ Manage Coupons</a></li>
-    <li><a href="/admin/rooms" style="display: block; padding: 0.5rem;">🛏️ Manage Rooms</a></li>
-    <li><a href="/auth/logout" style="display: block; padding: 0.5rem; color: red;">🚪 Logout</a></li>
-  </ul>
+<div class="admin-sidebar">
+  <div>
+      <h4>LuxeStay Hotels Admin</h4>
+      <ul>
+        <li><a href="/admin/dashboard">📊 Dashboard</a></li>
+        <li><a href="/admin/users">👤 Manage Users</a></li>
+        <li><a href="/admin/bookings">🏨 Manage Bookings</a></li>
+        <li><a href="/admin/coupons">🎟️ Manage Coupons</a></li>
+        <li><a href="/admin/rooms">🛏️ Manage Rooms</a></li>
+      </ul>
+    </div>
+    <form method="POST" action="/auth/logout">
+      <button class="logout-btn">Logout</button>
+    </form>
+  </div>
 </div>

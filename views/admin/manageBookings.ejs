@@ -1,26 +1,79 @@
 <%- include('../partials/header') %>
 
-<div style="display: flex; min-height: 90vh;">
+<div class="admin-layout">
   <%- include('../partials/adminSidebar') %>
-  
-  <div style="flex-grow: 1; padding: 2rem;">
-  <h2>Manage Bookings</h2>
-  <table class="table">
-    <thead>
-      <tr><th>User</th><th>Room</th><th>Dates</th><th>Status</th><th>Actions</th></tr>
-    </thead>
-    <tbody>
-      <% bookings.forEach(b => { %>
-        <tr>
-          <td><%= b.user?.username %></td>
-          <td><%= b.room?.name %></td>
-          <td><%= b.checkIn.toDateString() %> → <%= b.checkOut.toDateString() %></td>
-          <td><%= b.status %></td>
-          <td><button class="btn btn-sm">Change</button></td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+
+
+  <div class="admin-main">
+    <h2>Manage All Bookings</h2>
+
+    <!-- 🔍 Filter Row -->
+    <form method="GET" action="/admin/bookings" class="filter-bar">
+      <select name="status">
+        <option value="">All Statuses</option>
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+
+      <input type="date" name="checkIn" placeholder="Check-in Date" />
+
+      <input type="text" name="user" placeholder="Search User" />
+
+      <select name="roomType">
+        <option value="">All Room Types</option>
+        <option value="Standard">Standard</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Suite">Suite</option>
+      </select>
+
+      <button type="submit" class="btn-secondary">Search</button>
+    </form>
+
+    <!-- 📋 Booking Table -->
+    <div class="booking-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID / User</th>
+            <th>Room Type</th>
+            <th>Dates (In/Out)</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bookings.forEach(b => { %>
+            <tr>
+              <td>
+                <strong><%= b._id %></strong><br>
+                <%= b.user?.username %> (<%= b.user?.email %>)
+              </td>
+              <td><%= b.room?.type || 'N/A' %></td>
+              <td><%= b.checkIn.toLocaleDateString() %> - <%= b.checkOut.toLocaleDateString() %></td>
+              <td>$<%= b.total?.toFixed(2) || '0.00' %></td>
+              <td>
+                <span class="status <%= b.status.toLowerCase() %>">
+                  <%= b.status.toUpperCase() %>
+                </span>
+              </td>
+              <td>
+                <form method="POST" action="/admin/bookings/<%= b._id %>?_method=PUT">
+                  <select name="status" class="form-control form-control-sm">
+                    <option value="pending" <%= b.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                    <option value="completed" <%= b.status === 'completed' ? 'selected' : '' %>>Completed</option>
+                    <option value="cancelled" <%= b.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>
+                  </select>
+                  <button class="btn-secondary btn-sm mt-1">Update</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-</div>
+
 <%- include('../partials/footer') %>

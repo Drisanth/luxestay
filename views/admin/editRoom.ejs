@@ -1,28 +1,74 @@
 <%- include('../partials/header') %>
 
-    <div style="display: flex; min-height: 90vh;">
-        <%- include('../partials/adminSidebar') %>
+<div class="admin-layout">
+  <%- include('../partials/adminSidebar') %>
 
-            <div style="flex-grow: 1; padding: 2rem;">
-                <h2>Edit Room: <%= room.name %>
-                </h2>
-                <form method="POST" action="/admin/rooms/<%= room._id %>?_method=PUT">
-                    <div class="form-group"><label>Name</label><input name="name" class="form-control"
-                            value="<%= room.name %>"></div>
-                    <div class="form-group"><label>Type</label><input name="type" class="form-control"
-                            value="<%= room.type %>"></div>
-                    <div class="form-group"><label>Description</label><textarea name="description"
-                            class="form-control"><%= room.description %></textarea></div>
-                    <div class="form-group"><label>Price</label><input type="number" name="price" class="form-control"
-                            value="<%= room.price %>"></div>
-                    <div class="form-group"><label>Capacity</label><input type="number" name="capacity"
-                            class="form-control" value="<%= room.capacity %>"></div>
-                    <div class="form-group"><label>Amenities (comma-separated)</label><input name="amenities"
-                            class="form-control" value="<%= room.amenities.join(', ') %>"></div>
-                    <div class="form-group"><label>Available Rooms</label><input type="number" name="available"
-                            class="form-control" value="<%= room.available %>"></div>
-                    <button class="btn-primary">Save Changes</button>
-                </form>
-            </div>
+
+  <div class="admin-main">
+    <h2>Edit Room: <%= room.name %></h2>
+
+    <!-- 🔧 Room Edit Form -->
+    <form method="POST" action="/admin/rooms/<%= room._id %>?_method=PUT">
+      <div class="form-group">
+        <label>Name</label>
+        <input name="name" class="form-control" value="<%= room.name %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Type</label>
+        <input name="type" class="form-control" value="<%= room.type %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" class="form-control" required><%= room.description %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" name="price" class="form-control" value="<%= room.price %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Capacity</label>
+        <input type="number" name="capacity" class="form-control" value="<%= room.capacity %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Amenities (comma-separated)</label>
+        <input name="amenities" class="form-control" value="<%= room.amenities.join(', ') %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Available Rooms</label>
+        <input type="number" name="available" class="form-control" value="<%= room.available %>" required>
+      </div>
+
+      <button class="btn-primary mt-2">Save Changes</button>
+    </form>
+
+    <!-- 🖼 Room Image Upload -->
+    <hr>
+    <h4 class="mt-4">Room Image</h4>
+
+    <!-- Preview -->
+    <div style="margin-bottom: 1rem;">
+      <img src="/images/rooms/<%= room._id %>.jpg"
+           onerror="this.src='/images/room-default.jpg'"
+           alt="Room image"
+           style="width: 240px; height: 160px; object-fit: cover; border-radius: 8px; box-shadow: 0 0 6px rgba(0,0,0,0.1);" />
     </div>
-    <%- include('../partials/footer') %>
+
+    <!-- Upload Form -->
+    <form action="/admin/rooms/upload-image" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="roomId" value="<%= room._id %>">
+      <div class="form-group">
+        <label>Select New Image</label>
+        <input type="file" name="roomImage" accept="image/*" class="form-control" required>
+      </div>
+      <button type="submit" class="btn-secondary mt-2">Upload/Replace Image</button>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
