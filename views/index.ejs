@@ -92,7 +92,8 @@
       max-width: 500px;
     }
 
-    .btn-primary, .btn-secondary {
+    .btn-primary,
+    .btn-secondary {
       padding: 1rem 2rem;
       background-color: #a67252;
       color: white;
@@ -103,7 +104,8 @@
       transition: background 0.3s ease;
     }
 
-    .btn-primary:hover, .btn-secondary:hover {
+    .btn-primary:hover,
+    .btn-secondary:hover {
       background-color: #d9c8b4;
     }
 
@@ -290,7 +292,7 @@
 
     .feature-card {
       background-color: #f8f1e7;
-      width: 280px;
+      width: 400px;
       padding: 2rem;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -299,6 +301,7 @@
       text-align: left;
       position: relative;
     }
+
 
     .feature-card:hover {
       transform: translateY(-10px);
@@ -325,34 +328,63 @@
       color: #5a3c20;
     }
 
-    /* Footer */
-    footer {
-      background-color: #5a3c20;
-      padding: 3rem 2rem;
-      color: white;
-      text-align: center;
-    }
+/* Footer Layout */
+.footer-main {
+  background-color: #5a3c20;
+  color: white;
+  font-size: 0.95rem;
+  padding-top: 3rem;
+}
 
-    footer .footer-logo {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-    }
+.footer-main .footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 2rem 2rem;
+}
 
-    footer p {
-      font-size: 1rem;
-      margin: 1rem 0;
-    }
+.footer-main .footer-left,
+.footer-main .footer-right {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 2rem;
+}
 
-    footer a {
-      color: #d9c8b4;
-      text-decoration: none;
-      font-weight: 600;
-    }
+.footer-main .footer-left iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 8px;
+}
 
-    footer a:hover {
-      color: #fff;
-    }
+.footer-main .footer-right {
+  padding-left: 2rem;
+}
+
+.footer-main .footer-right h4 {
+  margin-bottom: 1rem;
+}
+
+.footer-main .footer-right p {
+  margin: 0.5rem 0;
+}
+
+.footer-main .footer-right a {
+  color: #d9c8b4;
+  text-decoration: none;
+}
+
+.footer-main .footer-right a:hover {
+  color: #ffffff;
+}
+
+.footer-main .footer-bottom {
+  text-align: center;
+  background-color: #4a3018;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
   </style>
 </head>
 
@@ -373,7 +405,8 @@
   <section class="landing">
     <div class="landing-left">
       <h1>Luxury Awaits You</h1>
-      <p>Experience world-class amenities, comfort, and service at LuxeStay Hotels — your perfect getaway destination.</p>
+      <p>Experience world-class amenities, comfort, and service at LuxeStay Hotels — your perfect getaway destination.
+      </p>
       <a href="#book-now" class="btn-primary">Book Now</a>
     </div>
     <div class="landing-right">
@@ -390,11 +423,15 @@
     <div class="about-content">
       <div class="about-left">
         <h3>Our Mission</h3>
-        <p>At LuxeStay Hotels, we are committed to providing the highest standards of comfort, service, and luxury. We believe in creating unforgettable experiences that go beyond just a place to stay.</p>
+        <p>At LuxeStay Hotels, we are committed to providing the highest standards of comfort, service, and luxury. We
+          believe in creating unforgettable experiences that go beyond just a place to stay.</p>
         <h3>What Makes Us Special?</h3>
-        <p>Our focus is on curated elegance, personalized services, and the finest amenities. Whether you are on a romantic getaway, a family vacation, or a business trip, LuxeStay promises a memorable experience.</p>
+        <p>Our focus is on curated elegance, personalized services, and the finest amenities. Whether you are on a
+          romantic getaway, a family vacation, or a business trip, LuxeStay promises a memorable experience.</p>
         <h3>Our Story</h3>
-        <p>Founded in 2010, LuxeStay began with a single mission — to redefine the concept of luxury travel. From one property to now over 100 locations worldwide, we have stayed true to our mission of excellence in hospitality.</p>
+        <p>Founded in 2010, LuxeStay began with a single mission — to redefine the concept of luxury travel. From one
+          property to now over 100 locations worldwide, we have stayed true to our mission of excellence in hospitality.
+        </p>
         <a href="/about" class="btn-primary">Read More</a>
       </div>
       <div class="about-right">
@@ -435,7 +472,8 @@
         <h4>Emma Stone</h4>
       </div>
       <div class="testimonial-card">
-        <p>"A world-class experience from start to finish. Highly recommend for anyone looking to escape into luxury."</p>
+        <p>"A world-class experience from start to finish. Highly recommend for anyone looking to escape into luxury."
+        </p>
         <h4>Chris Hemsworth</h4>
       </div>
       <div class="testimonial-card">
@@ -466,13 +504,27 @@
       </div>
     </div>
   </section>
+<footer class="footer-main">
+  <div class="footer-top">
+    <div class="footer-left">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy" allowfullscreen></iframe>
+    </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-logo">LuxeStay</div>
+    <div class="footer-right">
+      <h4>Contact Us</h4>
+      <p><strong>Address:</strong> 123 Luxe Street, Paradise City</p>
+      <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 234 567 890</a></p>
+      <p><strong>Email:</strong> <a href="mailto:info@luxestay.com">info@luxestay.com</a></p>
+      <p><a href="#">Privacy Policy</a></p>
+      <p><a href="#">Terms & Conditions</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
     <p>&copy; 2025 LuxeStay Hotels. All rights reserved.</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
-  </footer>
+  </div>
+</footer>
+
 
   <script>
     AOS.init({
