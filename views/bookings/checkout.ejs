@@ -41,7 +41,8 @@
         <label>Coupon Code (if any)</label>
         <div class="coupon-row">
           <input type="text" name="coupon" placeholder="e.g. WELCOME10">
-          <button type="button" disabled class="apply-btn">Apply</button> <!-- Future JS functionality -->
+          <button type="button" class="apply-btn">Apply</button>
+          <p id="coupon-feedback" style="color: green; display: none; font-weight: bold;"></p>
         </div>
       </div>
 
@@ -55,13 +56,99 @@
 
       <hr>
       <div class="price-breakdown">
-        <p><strong>Subtotal (<%= total / room.price %> night<%= total / room.price > 1 ? 's' : '' %>):</strong> $<%= total.toFixed(2) %></p>
+        <p><strong>Subtotal (<%= total / room.price %> night<%= total / room.price > 1 ? 's' : '' %>):</strong> $<%= (room.price * (total / room.price)).toFixed(2) %></p>
+        <% if (coupon && coupon.discountAmount) { %>
+          <p><strong>Coupon Applied (<%= coupon.code %> - <%= coupon.discountPercent %>% off):</strong> -$<%= coupon.discountAmount %></p>
+        <% } %>
         <p><strong>Total Amount:</strong> <span class="total-price">$<%= total.toFixed(2) %></span></p>
-      </div>
+</div>
 
-      <button type="submit" class="proceed-btn">Proceed to Payment</button>
+
+      <button type="button" id="review-payment-btn" class="proceed-btn">Proceed to Payment</button>
     </form>
   </div>
 </div>
+<div id="payment-summary-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-modal" id="close-modal-btn">&times;</span>
+    <h3>Booking Summary</h3>
+    <p><strong>Room:</strong> <%= room.name %></p>
+    <p><strong>Dates:</strong> <span id="summary-dates"></span></p>
+    <p><strong>Guests:</strong> <span id="summary-guests"></span></p>
+    <p><strong>Payment Method:</strong> <span id="summary-payment"></span></p>
+    <p><strong>Total:</strong> <span id="summary-total"></span></p>
+
+    <button id="confirm-booking-btn">Confirm</button>
+    <button id="cancel-booking-btn">Cancel</button>
+  </div>
+</div>
+
 
 <%- include('../partials/footer') %>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const couponInput = document.querySelector('input[name="coupon"]');
+  const applyBtn = document.querySelector('.apply-btn');
+
+  couponInput.addEventListener("input", () => {
+    applyBtn.disabled = couponInput.value.trim() === '';
+  });
+
+  applyBtn.addEventListener("click", async () => {
+    const code = couponInput.value.trim();
+
+    if (!code) return;
+
+    const roomId = document.querySelector('input[name="roomId"]').value;
+    const checkIn = document.querySelector('input[name="checkIn"]').value;
+    const checkOut = document.querySelector('input[name="checkOut"]').value;
+
+    try {
+      const res = await fetch(`/bookings/validate-coupon?code=${code}&roomId=${roomId}&checkIn=${checkIn}&checkOut=${checkOut}`);
+      const data = await res.json();
+
+      if (data.valid) {
+        document.querySelector('.total-price').textContent = `$${data.discountedTotal.toFixed(2)}`;
+        const breakdown = document.querySelector('.price-breakdown');
+        breakdown.insertAdjacentHTML('beforeend', `<p><strong>Coupon Applied (${code} - ${data.discount}%):</strong> -$${data.discountAmount.toFixed(2)}</p>`);
+        applyBtn.disabled = true;
+        document.getElementById('coupon-feedback').textContent = `${code} applied successfully!`;
+        document.getElementById('coupon-feedback').style.display = 'block';
+      } else {
+        alert('Invalid or expired coupon.');
+        document.getElementById('coupon-feedback').style.display = 'none';
+
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error validating coupon.');
+    }
+  });
+});
+document.getElementById('review-payment-btn').addEventListener('click', () => {
+  // Populate summary
+  const checkIn = document.querySelector('input[name="checkIn"]').value;
+  const checkOut = document.querySelector('input[name="checkOut"]').value;
+  const guests = document.querySelector('select[name="guests"]').value;
+  const paymentMethod = document.querySelector('select[name="paymentMethod"]').value;
+  const totalPrice = document.querySelector('.total-price').textContent;
+
+  document.getElementById('summary-dates').textContent = `${checkIn} to ${checkOut}`;
+  document.getElementById('summary-guests').textContent = guests;
+  document.getElementById('summary-payment').textContent = paymentMethod;
+  document.getElementById('summary-total').textContent = totalPrice;
+
+  document.getElementById('payment-summary-modal').style.display = 'flex';
+});
+
+function closeModal() {
+  document.getElementById('payment-summary-modal').style.display = 'none';
+}
+
+document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+document.getElementById('cancel-booking-btn').addEventListener('click', closeModal);
+
+document.getElementById('confirm-booking-btn').addEventListener('click', () => {
+  document.querySelector('form').submit();
+});
+</script>

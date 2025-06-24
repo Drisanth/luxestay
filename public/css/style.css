@@ -1211,6 +1211,107 @@ a { text-decoration:none; color: inherit; }
   background: #fce8e8;
   color: #c00;
 }
+/* Blurred background overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px); /* Blur effect */
+  background-color: rgba(0, 0, 0, 0.3); /* Slight dark tint */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Modal content box */
+.modal-content {
+  position: relative;
+  background-color: #fdf9f3; /* Match .checkout-form */
+  color: #332118;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease-out forwards;
+  transform: scale(0.95);
+  opacity: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Close (×) button */
+.modal-content .close-modal {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #5a3c20;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-content .close-modal:hover {
+  color: #000;
+}
+
+/* Buttons inside modal */
+.modal-content button {
+  margin: 1rem 0.5rem 0;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+#confirm-booking-btn {
+  background-color: #5a3c20;
+  color: white;
+}
+
+#confirm-booking-btn:hover {
+  background-color: #402d17;
+}
+
+#cancel-booking-btn {
+  background-color: #a83232;
+  color: white;
+}
+
+#cancel-booking-btn:hover {
+  background-color: #892626;
+}
+
+/* Animations */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    backdrop-filter: blur(0);
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
 /* ========== Hero ========== */
 .hero { background:url('/images/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; }
 .hero h1 { font-size:3rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
