@@ -173,14 +173,13 @@ router.post('/resetPassword', async (req, res) => {
     return res.redirect('/auth/resetPassword');
   }
 
-  // Hash the new password
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(newPassword, salt);
+  user.password = newPassword; // 🔥 Let pre-save hook hash it
   await user.save();
 
   req.flash('success', 'Password reset successfully. You can now log in.');
   res.redirect('/auth/login');
 });
+
 
 // GET: Logout
 router.get('/logout', (req, res) => {
