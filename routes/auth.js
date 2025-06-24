@@ -153,7 +153,7 @@ router.post('/resend-verification', async (req, res) => {
 });
 
 // GET: Reset Password Page
-router.get('/resetPassword', (req, res) => {
+router.get('/reset', (req, res) => {
   res.render('auth/resetPassword', {
     user: null,
     messages: {
