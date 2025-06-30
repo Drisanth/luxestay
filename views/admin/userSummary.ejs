@@ -1,0 +1,66 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <%- include('../partials/adminSidebar') %>
+
+  <div class="admin-main">
+    <div class="user-summary">
+
+      <!-- 🔹 User Profile -->
+      <div class="user-profile-box">
+        <img src="/avatars/<%= user.avatar || 'default.svg' %>" alt="Avatar" />
+        <div class="profile-details">
+          <h3><%= user.firstName %> <%= user.lastName %></h3>
+          <p><strong>Username:</strong> <%= user.username %></p>
+          <p><strong>Email:</strong> <%= user.email %></p>
+          <p><strong>Mobile:</strong> <%= user.mobile || 'N/A' %></p>
+          <p><strong>Address:</strong> <%= user.address || 'N/A' %></p>
+          <p><strong>ID Proof:</strong> <%= user.idProofNumber || 'N/A' %></p>
+          <p><strong>Status:</strong>
+            <span class="badge-status <%= user.isBlocked ? 'badge-cancelled' : 'badge-completed' %>">
+              <%= user.isBlocked ? 'Blocked' : 'Active' %>
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- 🔸 Bookings -->
+      <div class="booking-history">
+        <h4>Booking History</h4>
+        <% if (bookings.length === 0) { %>
+          <p>No bookings yet.</p>
+        <% } else { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Room</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Status</th>
+                <th>Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% bookings.forEach(b => { %>
+                <tr>
+                  <td><%= b.room.name %></td>
+                  <td><%= new Date(b.checkIn).toLocaleDateString() %></td>
+                  <td><%= new Date(b.checkOut).toLocaleDateString() %></td>
+                  <td>
+                    <span class="badge-status badge-<%= b.dynamicStatus.toLowerCase() %>">
+                      <%= b.dynamicStatus %>
+                    </span>
+                  </td>
+                  <td><%= b.paymentStatus %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

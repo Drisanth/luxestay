@@ -14,7 +14,9 @@ const userSchema = new mongoose.Schema({
   isAdmin: { type: Boolean, default: false },
   isVerified: { type: Boolean, default: false },
   verificationToken: String,
-
+  isBlocked: { type: Boolean, default: false },
+  resetOTP: String,
+  resetOTPExpires: Date,
 });
 
 // Password hashing middleware

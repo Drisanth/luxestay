@@ -32,18 +32,21 @@ router.post('/register', async (req, res) => {
 
   const token = crypto.randomBytes(32).toString('hex');
 
+  const isAdmin = req.body.isAdmin === 'true'; 
   const user = new User({
     username,
     email,
-    password, // 🔒 Hashed via pre-save hook
+    password,
     firstName,
     lastName,
     mobile,
     address,
     idProofNumber,
-    verificationToken: token,
-    isVerified: false
+    isAdmin,
+    isVerified: isAdmin, // 👈 Auto-verify if admin
+    verificationToken: isAdmin ? undefined : token
   });
+
 
   await user.save();
 
@@ -100,6 +103,10 @@ router.post('/login', async (req, res) => {
 
   if (!user.isVerified) {
     req.flash('error', 'Please verify your email before logging in.');
+    return res.redirect('/auth/login');
+  }
+   if (user.isBlocked) {
+    req.flash('error', 'Your account has been blocked by the admin.');
     return res.redirect('/auth/login');
   }
 
@@ -178,6 +185,104 @@ router.post('/resetPassword', async (req, res) => {
 
   req.flash('success', 'Password reset successfully. You can now log in.');
   res.redirect('/auth/login');
+});
+
+// GET: Forgot Password Page
+router.get('/forgot-password', (req, res) => {
+  res.render('auth/forgotPassword', {
+    user: null,
+    messages: {
+      error: req.flash('error'),
+      success: req.flash('success')
+    }
+  });
+});
+router.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    req.flash('error', 'No account found with that email.');
+    return res.redirect('/auth/forgot-password');
+  }
+
+  const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
+  const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+  user.resetOTP = otp;
+  user.resetOTPExpires = expiry;
+  await user.save();
+
+  await transporter.sendMail({
+    to: user.email,
+    subject: '🔐 LuxeStay Password Reset OTP',
+    html: `
+      <p>Hello ${user.firstName},</p>
+      <p>Your OTP for password reset is:</p>
+      <h2>${otp}</h2>
+      <p>This OTP will expire in 10 minutes.</p>
+    `
+  });
+
+  res.render('auth/verifyOtp', { email });
+});
+router.post('/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  const user = await User.findOne({ email, resetOTP: otp });
+
+  if (!user || user.resetOTPExpires < Date.now()) {
+    req.flash('error', 'Invalid or expired OTP.');
+    return res.redirect('/auth/forgot-password');
+  }
+
+  // Clear OTP after verification
+  user.resetOTP = undefined;
+  user.resetOTPExpires = undefined;
+  await user.save();
+
+  res.render('auth/newPassword', { 
+    email, 
+    messages: {
+      error: req.flash('error'),
+      success: req.flash('success')
+    }
+  });
+});
+
+router.post('/reset-password', async (req, res) => {
+  const { email, newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    req.flash('error', 'Passwords do not match.');
+    return res.redirect('/auth/forgot-password');
+  }
+
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+  if (!passwordRegex.test(newPassword)) {
+    req.flash('error', 'Password must be at least 8 characters with 1 uppercase letter and 1 number.');
+    return res.redirect('/auth/forgot-password');
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    req.flash('error', 'User not found.');
+    return res.redirect('/auth/forgot-password');
+  }
+
+  user.password = newPassword; // pre-save hook hashes this
+  await user.save();
+
+  req.flash('success', 'Password successfully reset. You can now log in.');
+  res.redirect('/auth/login');
+});
+router.get('/new-password', (req, res) => {
+  res.render('auth/newPassword', {
+    user: null,
+    messages: {
+      error: req.flash('error'),
+      success: req.flash('success')
+    }
+  });
 });
 
 

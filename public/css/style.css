@@ -81,6 +81,81 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+    /* Features Section */
+    .features-section {
+      background-color: #fff;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .features-section h2 {
+      font-size: 2.5rem;
+      color: #5a3c20;
+      font-weight: 700;
+    }
+    .features-container {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .feature {
+      max-width: 300px;
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f1e1c1;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .feature h3 {
+      font-size: 1.8rem;
+      color: #5a3c20;
+    }
+    .feature p {
+      color: #5a3c20;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      background-color: #f8f1e7;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .testimonials-section h2 {
+      font-size: 2.5rem;
+      color: #5a3c20;
+      font-weight: 700;
+    }
+    .testimonials-container {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .testimonial {
+      max-width: 350px;
+      background-color: #fff;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    .testimonial p {
+      font-size: 1.1rem;
+      color: #5a3c20;
+    }
+    .testimonial h4 {
+      font-size: 1.3rem;
+      color: #a67252;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
 /*version 2 login*/
 /* Login Page Styling */
 .login-page {
@@ -210,6 +285,27 @@ body {
 .btn-login:hover {
   background-color: #6c4329;
 }
+
+/*register-form*/
+#password-strength {
+  height: 6px;
+  background: #ddd;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+#strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: 0.3s ease-in-out;
+  border-radius: 4px;
+}
+.input-msg {
+  font-size: 0.85rem;
+  color: #a00;
+  margin-top: 4px;
+  display: block;
+}
+
 /*version 2 bookings*/
 .container {
   max-width: 1200px;
@@ -1352,3 +1448,232 @@ a { text-decoration:none; color: inherit; }
   border-top:1px solid #e0e0e0; 
   text-align:center; 
   color:#777; }
+
+  .sold-out {
+  color: red;
+  font-weight: bold;
+}
+/* Table Container */
+.user-table {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Table */
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Table Head */
+.user-table th {
+  background: #f7f9fc;
+  color: #333;
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+}
+
+/* Table Rows */
+.user-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+/* Alternate Row Color */
+.user-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Hover Effect */
+.user-table tr:hover {
+  background: #f1f1f1;
+}
+
+/* Badge Styles */
+.badge-admin {
+  background: #007bff;
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+.badge-blocked {
+  background: #dc3545;
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+.badge-active {
+  background: #28a745;
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  margin-right: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-sm:hover {
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-warning {
+  background: #ffc107;
+  color: black;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-info {
+  background: #17a2b8;
+  color: white;
+}
+/* === User Summary Wrapper === */
+.user-summary {
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
+/* === User Profile Section === */
+.user-profile-box {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+.user-profile-box img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 1.5rem;
+  border: 2px solid #ddd;
+}
+
+.user-profile-box .profile-details {
+  flex: 1;
+}
+
+.profile-details h3 {
+  margin: 0 0 5px;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.profile-details p {
+  margin: 2px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* === Booking Table Section === */
+.booking-history {
+  margin-top: 2rem;
+}
+
+.booking-history h4 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.booking-history table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.booking-history th,
+.booking-history td {
+  padding: 12px 15px;
+  border: 1px solid #eee;
+}
+
+.booking-history th {
+  background: #f1f3f5;
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+}
+
+.booking-history tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.booking-history tr:hover {
+  background: #f1f1f1;
+}
+
+/* === Booking Status Badges === */
+.badge-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-upcoming {
+  background: #17a2b8;
+  color: #fff;
+}
+
+.badge-ongoing {
+  background: #ffc107;
+  color: #333;
+}
+
+.badge-completed {
+  background: #28a745;
+  color: #fff;
+}
+
+.badge-cancelled {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* === Responsive (Optional) === */
+@media (max-width: 768px) {
+  .user-profile-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-profile-box img {
+    margin-bottom: 1rem;
+  }
+}
+

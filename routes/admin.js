@@ -97,6 +97,18 @@ router.get('/rooms', isAdmin, async (req, res) => {
   const rooms = await Room.find();
   res.render('admin/manageRooms', { rooms, user: req.session.user });
 });
+// ✅ Update Booking Status
+router.put('/bookings/:id', isAdmin, async (req, res) => {
+  const { status } = req.body;
+
+  try {
+    await Booking.findByIdAndUpdate(req.params.id, { status });
+    res.redirect('/admin/bookings');
+  } catch (err) {
+    console.error('Failed to update booking:', err);
+    res.status(500).send('Error updating booking');
+  }
+});
 
 router.get('/rooms/new', isAdmin, (req, res) => {
   res.render('admin/newRoom', { user: req.session.user });
@@ -155,5 +167,48 @@ router.delete('/rooms/:id', isAdmin, async (req, res) => {
   await Room.findByIdAndDelete(req.params.id);
   res.redirect('/admin/rooms');
 });
+// 🔒 Block or Unblock a user
+router.post('/users/:id/toggle-block', isAdmin, async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.isBlocked = !user.isBlocked;
+    await user.save();
+  }
+  res.redirect('/admin/users');
+});
+
+// 🗑️ Delete user
+router.post('/users/:id/delete', isAdmin, async (req, res) => {
+  await Booking.deleteMany({ user: req.params.id }); // optional: clean bookings
+  await User.findByIdAndDelete(req.params.id);
+  res.redirect('/admin/users');
+});
+
+// 📄 View user summary
+router.get('/users/:id/summary', isAdmin, async (req, res) => {
+  const user = await User.findById(req.params.id);
+  const bookings = await Booking.find({ user: user._id }).populate('room');
+
+  const today = new Date();
+  const updatedBookings = bookings.map(b => {
+    const checkIn = new Date(b.checkIn);
+    const checkOut = new Date(b.checkOut);
+
+    let dynamicStatus = 'COMPLETED';
+    if (today < checkIn) dynamicStatus = 'UPCOMING';
+    else if (today <= checkOut) dynamicStatus = 'ONGOING';
+
+    return {
+      ...b.toObject(),
+      dynamicStatus
+    };
+  });
+
+  res.render('admin/userSummary', {
+    user,
+    bookings: updatedBookings
+  });
+});
+
 
 module.exports = router;

@@ -1,53 +1,59 @@
 <%- include('../partials/header') %>
 
-<div class="container-rooms">
-  <h2 class="text-center mb-4">Explore Our Rooms</h2>
+  <div class="container-rooms">
+    <h2 class="text-center mb-4">Explore Our Rooms</h2>
 
-  <!-- 🔍 Filters -->
-  <form class="filters" id="filterForm" onsubmit="event.preventDefault();">
-    <select id="filterType">
-      <option value="">All Types</option>
-      <option value="Deluxe">Deluxe</option>
-      <option value="Standard">Standard</option>
-      <option value="Suite">Suite</option>
-    </select>
+    <!-- 🔍 Filters -->
+    <form class="filters" id="filterForm" onsubmit="event.preventDefault();">
+      <select id="filterType">
+        <option value="">All Types</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Standard">Standard</option>
+        <option value="Suite">Suite</option>
+        <option value="Luxury">Luxury</option>
+      </select>
 
-    <select id="filterGuests">
-      <option value="">Any</option>
-      <option value="1">1 Guest</option>
-      <option value="2">2 Guests</option>
-      <option value="3">3 Guests</option>
-      <option value="4">4+ Guests</option>
-    </select>
+      <select id="filterGuests">
+        <option value="">Any</option>
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4+ Guests</option>
+      </select>
 
-    <input type="number" id="minPrice" placeholder="Min" />
-    <input type="number" id="maxPrice" placeholder="Max" />
-    <input type="date" id="checkIn" />
-    <input type="date" id="checkOut" />
+      <input type="number" id="minPrice" placeholder="Min" />
+      <input type="number" id="maxPrice" placeholder="Max" />
+      <input type="date" id="checkIn" />
+      <input type="date" id="checkOut" />
 
-    <button type="reset" class="btn-clear" onclick="resetFilters()">Clear Filters</button>
-  </form>
+      <button type="reset" class="btn-clear" onclick="resetFilters()">Clear Filters</button>
+    </form>
 
-  <!-- 🏨 Rooms -->
-  <div class="room-grid" id="roomGrid">
-    <% rooms.forEach(room => { %>
-      <div class="room-card"
-        data-type="<%= room.type %>"
-        data-capacity="<%= room.capacity %>"
-        data-price="<%= room.price %>">
-        <img 
-          src="/images/rooms/<%= room._id %>.jpg" 
-          alt="<%= room.name %>" 
-          onerror="this.src='/images/room-default.jpg'" 
-        />
-        <div class="room-details">
-          <h4><%= room.name %></h4>
-          <p><%= room.description %></p>
-          <p><strong>Capacity:</strong> Up to <%= room.capacity %> guests</p>
-          <p><strong>Amenities:</strong> <%= room.amenities.join(', ') %></p>
+    <!-- 🏨 Rooms -->
+    <div class="room-grid" id="roomGrid">
+      <% rooms.forEach(room=> { %>
+        <div class="room-card" data-type="<%= room.type %>" data-capacity="<%= room.capacity %>"
+          data-price="<%= room.price %>">
+          <img src="/images/rooms/<%= room._id %>.jpg" alt="<%= room.name %>"
+            onerror="this.src='/images/room-default.jpg'" />
+          <div class="room-details">
+            <h4>
+              <%= room.name %>
+            </h4>
+            <p>
+              <%= room.description %>
+            </p>
+            <p><strong>Capacity:</strong> Up to <%= room.capacity %> guests</p>
+            <p><strong>Amenities:</strong>
+              <%= room.amenities.join(', ') %></p>
           <p class="price">From $<%= room.price %>/night</p>
-          <p><%= room.available %> available</p>
-          <a href="/rooms/<%= room._id %>" class="btn-room">View Details & Book</a>
+          <% if (room.available > 0) { %>
+  <p><%= room.available %> available</p>
+  <a href="/rooms/<%= room._id %>" class="btn-room">View Details & Book</a>
+<% } else { %>
+  <p class="sold-out">Sold Out</p>
+  <button class="btn-room" disabled style="background-color: #ccc; cursor: not-allowed;">Unavailable</button>
+<% } %>
         </div>
       </div>
     <% }) %>
@@ -92,13 +98,11 @@
     filterRooms();
   }
 
-  // Attach events
   [typeFilter, guestsFilter, minPrice, maxPrice].forEach(input => {
     input.addEventListener('change', filterRooms);
   });
 
-  // Initialize on load
   window.addEventListener('DOMContentLoaded', filterRooms);
 </script>
 
-<%- include('../partials/footer') %>
+                  <%- include('../partials/footer') %>
